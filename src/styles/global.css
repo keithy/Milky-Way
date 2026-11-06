@@ -10,11 +10,28 @@
   --underline: #ffcb8d;
   --header: 'Fraunces', Georgia, serif;
   --body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* Backdrop
+   *
+   * One image carries both scenes. The theme picks which half is
+   * shown, by moving the background position.
+   *
+   * The image is drawn at twice the viewport height, so "top" shows
+   * the sky and "bottom" shows the rock. The two halves meet at the
+   * horizon, which is why the image is one file and not two. */
+  --scene: url('/images/hh/both-circuits-bg.jpg');
+  --scene-size: 100% 200%;
 }
 
 html {
   background-color: var(--background);
   color: var(--text);
+  background-image: var(--scene);
+  background-size: var(--scene-size);
+  background-position: center bottom;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  transition: background-position 1500ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 body {
@@ -292,6 +309,7 @@ footer {
 html.light {
   background-color: var(--background-light);
   color: var(--text-light);
+  background-position: center top;
 }
 
 .light .navbar__title>a {
