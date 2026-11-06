@@ -1,22 +1,40 @@
 ---
-title: 'Post 1'
-author: Tristen Tomczak
-date: '03-23-2025'
+title: 'Server farms, composed'
+author: Angelic Infrastructure
+date: '11-05-2026'
 image:
     url: '/images/blog-post.webp'
-    alt: 'Post Thumbnail'
+    alt: 'Server farm'
 ---
 
-Aenean a ex et metus finibus malesuada commodo in magna. In ut libero urna. Aenean in quam in ipsum rutrum egestas. Donec semper dignissim ante. Sed efficitur mi et sapien ultrices malesuada. Aliquam fermentum aliquam ante, eu semper mi vestibulum quis. Sed et purus metus. Pellentesque vestibulum commodo euismod. Duis a mauris accumsan lorem laoreet tempor. Mauris accumsan varius metus, in rutrum magna accumsan eget. Pellentesque at leo at sem tempor hendrerit non sit amet ante. Cras commodo augue sed magna rutrum rutrum.
+A server farm is not a rack of machines. It is a promise that the same
+thing can be built again next month, on different hardware, in a
+different room, by someone who was not in the original conversation.
+That promise only holds if the parts beneath it are inspectable.
 
 <div class="center">
-  <img class="pro-img" src="/images/image-1.webp" alt="First Image" width="500px" height="281" loading="lazy" decoding="async">
+  <img class="pro-img" src="/images/image-1.webp" alt="Racked hardware" width="500px" height="281" loading="lazy" decoding="async">
 </div>
 
-Vivamus sed faucibus lorem. Aenean a lorem convallis, ultrices nisl vitae, imperdiet elit. Duis in tristique lacus. Quisque sollicitudin dolor ac dui faucibus, ut tincidunt velit blandit. Donec tincidunt metus eros, at dignissim enim blandit ut. Cras varius tincidunt tortor ac tincidunt. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed a ipsum quis nulla commodo pretium. Ut sed sem bibendum, facilisis dolor sit amet, interdum nibh. Aliquam id auctor dolor. In nulla diam, mattis quis nisl et, aliquam interdum quam. Donec lobortis ex arcu, ac pharetra ante vehicula euismod. Donec finibus faucibus felis vitae facilisis.
+Composable, repeatable infrastructure across heterogeneous hardware and
+cloud environments means the same declarative configuration produces the
+same result whether it lands on bare metal, a hypervisor, or a managed
+instance. Not the same vendor, not the same size — the same result.
+
+The hard part is rarely the provisioning. It is the divergence that
+accumulates afterwards: the one machine with a manual fix, the one
+instance with a security group nobody wrote down, the runbook that
+assumes someone remembers. A farm is not the collection of machines. It
+is the collection of ways they are allowed to differ.
 
 <div class="center">
-  <img class="pro-img" src="/images/image-2.webp" alt="Second Image" width="500px" height="281" loading="lazy" decoding="async">
+  <img class="pro-img" src="/images/image-2.webp" alt="Rack detail" width="500px" height="281" loading="lazy" decoding="async">
 </div>
 
-Vivamus sed faucibus lorem. Aenean a lorem convallis, ultrices nisl vitae, imperdiet elit. Duis in tristique lacus. Quisque sollicitudin dolor ac dui faucibus, ut tincidunt velit blandit. Donec tincidunt metus eros, at dignissim enim blandit ut. Cras varius tincidunt tortor ac tincidunt. Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed a ipsum quis nulla commodo pretium. Ut sed sem bibendum, facilisis dolor sit amet, interdum nibh. Aliquam id auctor dolor. In nulla diam, mattis quis nisl et, aliquam interdum quam. Donec lobortis ex arcu, ac pharetra ante vehicula euismod. Donec finibus faucibus felis vitae facilisis.
+So the design goal is to make the ordinary path the only path. Immutable
+operating systems, configuration as data, schemas that reject a bad
+declaration before it reaches a machine, and a filesystem that keeps its
+promises about data. Then the exception, when it happens, is visible
+rather than folklore.
+
+A server farm earns its name the day somebody joins and can read it.

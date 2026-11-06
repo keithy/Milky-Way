@@ -1,19 +1,27 @@
 ---
-title: 'Project 2'
-description: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci'
+title: 'Bespoke tooling'
+description: 'Specialised automation and integration work for the gaps between products, built with Groan and eventually the Glamorous Toolkit.'
 image:
     url: '/images/GitHub.webp'
-    alt: 'GitHub wallpaper'
+    alt: 'Bespoke tooling'
 worksImage1:
     url: '/images/image-1.webp'
-    alt: 'first image of your project.'
+    alt: 'The gap between products'
 worksImage2:
     url: '/images/image-2.webp'
-    alt: 'second image of your project.'
-platform: Web
-stack: Astro, JavaScript
-website: https://astro-milky-way.netlify.app/
-github: https://github.com/ttomczak3/Milky-Way
+    alt: 'Tooling in place'
+platform: Tooling
+stack: Groan, Glamorous Toolkit, Bash, Pkl
+website: https://angelic.infrastructure/
+github: https://gitlab.com/angelbox
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras faucibus a tortor at molestie. Sed pellentesque leo auctor, auctor lorem nec, venenatis risus. Vivamus commodo ipsum vitae orci finibus, vel porta nunc viverra. In hac habitasse platea dictumst. Nunc pretium, ligula ultricies consequat sollicitudin, enim ex ullamcorper nisl.
+The integration nobody enjoys, the product that almost fits, the script
+that grew into a load-bearing component with no owner. That is where
+useful work begins.
+
+The tools are hierarchical and composable, so the common path is the
+short one and the unusual path stays reachable. They expose safe
+defaults and make the dangerous path explicit rather than magical. The
+measure of good tooling is not how much it can do — it is how little you
+have to know about it to use it safely.

@@ -1,15 +1,15 @@
 /* Global styles */
 :root {
-  --background: #1e1e2e;
-  --background-light: #fcebf3;
-  --button: #78c2ad;
-  --text: #eff1f5;
-  --text-light: #1e1e2e;
-  --text-link: #78c2ad;
-  --text-link-light: #375a7f;
-  --underline: #375a7f;
-  --header: 'Pacifico', cursive;
-  --body: 'Josefin Sans', sans-serif;
+  --background: #0a1017;
+  --background-light: #f4f7fa;
+  --button: #7ee0c2;
+  --text: #e8edf2;
+  --text-light: #111922;
+  --text-link: #7ee0c2;
+  --text-link-light: #1f6b56;
+  --underline: #ffcb8d;
+  --header: 'Fraunces', Georgia, serif;
+  --body: 'Inter', ui-sans-serif, system-ui, sans-serif;
 }
 
 html {

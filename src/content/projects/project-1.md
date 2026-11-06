@@ -1,19 +1,27 @@
 ---
-title: 'Project 1'
-description: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci'
+title: 'Server farms'
+description: 'Composable, repeatable infrastructure for teams that need dependable capacity across heterogeneous hardware and cloud environments.'
 image:
     url: '/images/GitHub.webp'
-    alt: 'GitHub wallpaper'
+    alt: 'Server farm'
 worksImage1:
     url: '/images/image-1.webp'
-    alt: 'first image of your project.'
+    alt: 'Racked hardware'
 worksImage2:
     url: '/images/image-2.webp'
-    alt: 'second image of your project.'
-platform: Web
-stack: Astro, JavaScript
-website: https://astro-milky-way.netlify.app/
-github: https://github.com/ttomczak3/Milky-Way
+    alt: 'Rack detail'
+platform: Infrastructure
+stack: NixOS, Talos, Pkl, ZFS
+website: https://angelic.infrastructure/
+github: https://gitlab.com/angelbox
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras faucibus a tortor at molestie. Sed pellentesque leo auctor, auctor lorem nec, venenatis risus. Vivamus commodo ipsum vitae orci finibus, vel porta nunc viverra. In hac habitasse platea dictumst. Nunc pretium, ligula ultricies consequat sollicitudin, enim ex ullamcorper nisl.
+The same declarative configuration, producing the same result on bare
+metal, a hypervisor, or a managed instance. Immutable operating systems,
+configuration as data, schemas that catch a bad declaration before it
+reaches a machine, and a filesystem that keeps its promises about data.
+
+A farm is not the collection of machines. It is the collection of ways
+they are allowed to differ — and the whole design is aimed at making
+that collection small, visible, and reproducible by somebody who was
+not in the original conversation.
