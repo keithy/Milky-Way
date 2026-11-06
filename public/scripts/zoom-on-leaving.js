@@ -10,6 +10,11 @@
 // zoom has to happen while the page is still alive. That is what the
 // delay is for.
 
+// Wrapped so the names below stay out of the global scope. Another
+// script on the page may declare the same names, and a global const
+// cannot be declared twice.
+(() => {
+
 const zoomDuration = 800;
 
 // The detail pages are the posts and the projects. The list pages share
@@ -54,6 +59,13 @@ document.addEventListener("click", (event) => {
         return;
     }
 
+    // When the reader has asked their system to reduce motion, the zoom
+    // does not happen — so the navigation should not be held back
+    // either. A pause with nothing happening is worse than no pause.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        return;
+    }
+
     event.preventDefault();
 
     // Zoom in, and hold the navigation until it has finished. The
@@ -65,3 +77,5 @@ document.addEventListener("click", (event) => {
         window.location.href = link.href;
     }, zoomDuration);
 });
+
+})();

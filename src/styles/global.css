@@ -81,6 +81,22 @@ html.unzoomed.leaving {
   transition: --zoom 800ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Reduced motion.
+ *
+ * The backdrop zooms and slides across the whole viewport, which is the
+ * kind of large-scale movement that causes discomfort for people who
+ * have asked their system to reduce motion.
+ *
+ * The zoom also has a navigation delay attached to it, so the script
+ * that owns the delay has to know about this too — otherwise the reader
+ * would sit through a pause with nothing happening. */
+@media (prefers-reduced-motion: reduce) {
+  html.theme-animating,
+  html.unzoomed.leaving {
+    transition: none;
+  }
+}
+
 body {
   max-width: 756px;
   margin: 0 auto;
