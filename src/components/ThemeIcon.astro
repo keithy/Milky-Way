@@ -44,10 +44,24 @@
 
     const handleToggleClick = () => {
         const element = document.documentElement;
+
+        // The backdrop slides between the two halves when the theme
+        // changes, but only on the toggle. Left on permanently, the
+        // light theme animates the position on every page load,
+        // because the browser starts from the initial value.
+        //
+        // The transition has to be armed before the theme changes, or
+        // the browser has nothing to animate from.
+        element.classList.add("theme-animating");
+
         element.classList.toggle("light");
 
         const isLight = element.classList.contains("light");
         localStorage.setItem("theme", isLight ? "light" : "dark");
+
+        // Disarm once the slide is done. The duration matches the
+        // transition in global.css.
+        setTimeout(() => element.classList.remove("theme-animating"), 1600);
     }
 
     document.getElementById("themeToggle").addEventListener("click", handleToggleClick);

@@ -2,10 +2,10 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
-const { pageTitle } = Astro.props;
+const { pageTitle, zoomed = false } = Astro.props;
 ---
 <!DOCTYPE html>
-<html transition:animate="none" lang="en">
+<html transition:animate="none" lang="en" class:list={{ unzoomed: !zoomed }}>
 	<head>
         <meta charset="utf-8" />
         <meta name="description" content="Angelic Infrastructure creates opinionated infrastructure products, server farms, server appliances, and bespoke tooling for demanding technical teams.">
@@ -39,6 +39,84 @@ const { pageTitle } = Astro.props;
             
             colorMode();
             document.addEventListener('astro:after-swap', colorMode);
+        </script>
+
+        <script>
+            // The three main pages — the index, the works list and the
+            // posts list — zoom the backdrop in on the way out, and hold
+            // the navigation until the zoom has finished.
+            //
+            // The pages that are already zoomed, the posts and the
+            // projects, have nothing to animate and navigate straight
+            // away.
+            //
+            // A document unload gives the browser nothing to animate
+            // from, so the zoom has to happen while the page is still
+            // alive. That is what the delay is for.
+            const zoomDuration = 800;
+
+            // The detail pages are already zoomed, and have nothing to
+            // animate on the way out.
+            const isAlreadyZoomed = () =>
+                !document.documentElement.classList.contains("unzoomed");
+
+            document.addEventListener("click", (event) => {
+                const link = event.target.closest("a");
+
+                if (!link) {
+                    return;
+                }
+
+                // Let the browser handle anything modified, or aimed
+                // somewhere new.
+                if (event.metaKey || event.ctrlKey || event.shiftKey ||
+                    event.button !== 0 || link.target === "_blank") {
+                    return;
+                }
+
+                const destination = link.getAttribute("href");
+
+                // Only links that go somewhere. Anchors and empty
+                // hrefs stay on the page.
+                if (!destination || destination.startsWith("#")) {
+                    return;
+                }
+
+                if (isAlreadyZoomed()) {
+                    return;
+                }
+
+                // The zoom only makes sense when the destination is
+                // already zoomed — a post, a project, or somewhere off
+                // the site. Going from one main page to another has
+                // nothing to zoom into, so it goes straight.
+
+                // The detail pages are the posts and the projects. The
+                // list pages share the prefix, so they are excluded.
+                const goesToDetailPage = [
+                    "/posts/",
+                    "/projects/",
+                ].some((prefix) =>
+                    destination.startsWith(prefix) &&
+                    destination !== prefix);
+
+                const leavesTheSite = !destination.startsWith("/");
+
+                if (!goesToDetailPage && !leavesTheSite) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                // Zoom in, and hold the navigation until it has finished.
+                // The unzoomed class stays, so the leaving rule is the
+                // one that takes effect.
+                document.documentElement.classList.add("leaving");
+
+                setTimeout(() => {
+                    window.location.href = link.href;
+                }, zoomDuration);
+            });
         </script>
 	</body>
 </html>

@@ -31,24 +31,65 @@
    * bg5 is the one in use. The others are candidates that were tried
    * and set aside. */
   --scene: url('/images/hh/both-circuits-bg5.jpeg');
-  --scene-size: 100% 200%;
+}
+
+@property --zoom {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 100%;
 }
 
 html {
   background-color: var(--background);
   color: var(--text);
   background-image: var(--scene);
-  background-size: var(--scene-size);
+  --zoom: 120%;
+  background-size: var(--zoom) calc(var(--zoom) * 2);
   background-position: center bottom;
   background-attachment: fixed;
   background-repeat: no-repeat;
+}
+
+/* The backdrop slides between the two halves when the theme changes.
+ *
+ * The transition is armed by the toggle rather than left on, because
+ * the light theme's position differs from the initial value — so a
+ * standing transition animates the backdrop on every page load. */
+html.theme-animating {
   transition: background-position 1500ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* The three main pages are the ones that are not zoomed. Everything
+ * else — the posts and the projects — carries the zoom as the
+ * default, with no markup of its own.
+ *
+ * The zoom is a custom property rather than the background-size itself,
+ * because a registered custom property can be transitioned. */
+html.unzoomed {
+  --zoom: 100%;
+}
+
+/* Zooming in on the way out of a main page.
+ *
+ * The detail pages are already zoomed, so the zoom carries across the
+ * navigation rather than happening on arrival. The transition is armed
+ * here rather than left on the base rule, for the same reason the
+ * theme's is: a standing transition would animate the backdrop on every
+ * page load. */
+html.unzoomed.leaving {
+  --zoom: 120%;
+  transition: --zoom 800ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 body {
-  max-width: 540px;
+  max-width: 648px;
   margin: 0 auto;
   text-align: justify;
+}
+
+/* The three main pages keep the narrower measure. */
+html.unzoomed body {
+  max-width: 540px;
 }
 
 h1,
