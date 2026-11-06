@@ -43,7 +43,7 @@ html {
   background-color: var(--background);
   color: var(--text);
   background-image: var(--scene);
-  --zoom: 120%;
+  --zoom: 140%;
   background-size: var(--zoom) calc(var(--zoom) * 2);
   background-position: center bottom;
   background-attachment: fixed;
@@ -77,12 +77,12 @@ html.unzoomed {
  * theme's is: a standing transition would animate the backdrop on every
  * page load. */
 html.unzoomed.leaving {
-  --zoom: 120%;
+  --zoom: 140%;
   transition: --zoom 800ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
-  max-width: 648px;
+  max-width: 756px;
   margin: 0 auto;
   text-align: justify;
 }
