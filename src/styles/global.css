@@ -18,8 +18,19 @@
    *
    * The image is drawn at twice the viewport height, so "top" shows
    * the sky and "bottom" shows the rock. The two halves meet at the
-   * horizon, which is why the image is one file and not two. */
-  --scene: url('/images/hh/both-circuits-bg.jpg');
+   * horizon, which is why the image is one file and not two.
+   *
+   * Candidates tried, swapped by changing this one line:
+   *
+   *   both-circuits-bg.jpg   896x1200  the original
+   *   both-circuits-bg2.jpg  768x1376  rock falls on the halfway line
+   *   both-circuits-bg3.jpg  768x1376  broken cloud, rock lower still
+   *   both-circuits-bg4.jpg  768x1376  circuit networks, clear centre
+   *   both.jpg               768x1376  a further variation
+   *
+   * bg5 is the one in use. The others are candidates that were tried
+   * and set aside. */
+  --scene: url('/images/hh/both-circuits-bg5.jpeg');
   --scene-size: 100% 200%;
 }
 
