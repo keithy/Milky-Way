@@ -22,6 +22,10 @@ const projectsCollection = defineCollection({
     stack: z.string(),
     website: z.string(),
     github: z.string(),
+    // A draft is only shown in the UT mode. It is still built, and
+    // hidden by the stylesheet, so the mode can be switched in the
+    // browser without a rebuild.
+    draft: z.boolean().optional(),
   })
 });
 
@@ -34,7 +38,11 @@ const postsCollection = defineCollection({
     image: z.object({
       url: z.string(),
       alt: z.string()
-    })
+    }),
+    // A draft is only shown in the UT mode. It is still built, and
+    // hidden by the stylesheet, so the mode can be switched in the
+    // browser without a rebuild.
+    draft: z.boolean().optional(),
   })
 });
 

@@ -11,6 +11,24 @@
   --header: 'Fraunces', Georgia, serif;
   --body: 'Inter', ui-sans-serif, system-ui, sans-serif;
 
+  /* The typography options.
+   *
+   * A typography option is chosen with the "typography" cookie, and
+   * each one is a class on the html element. The cookie's value is the
+   * class name, so "typography=option1" gives html.option1.
+   *
+   * The faces are named here and loaded from Google Fonts in the
+   * layout. */
+  --display: 'Fraunces', Georgia, serif;
+  --sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --technical: 'Fraunces', Georgia, serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* The celestial gold, in three tones. */
+  --celestial-gold-light: #fff2cc;
+  --celestial-gold: #ffcb8d;
+  --celestial-gold-dark: #dca462;
+
   /* Backdrop
    *
    * One image carries both scenes. The theme picks which half is
@@ -37,6 +55,16 @@
   syntax: '<percentage>';
   inherits: true;
   initial-value: 100%;
+}
+
+/* Option one — the display face is decorative, the technical face is a
+ * grotesque, and the body stays sans. */
+html.option1 {
+  --display: 'Cinzel Decorative', serif;
+  --sans: 'Inter', sans-serif;
+  --technical: 'Space Grotesk', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --underline: var(--celestial-gold);
 }
 
 html {
@@ -110,7 +138,7 @@ html.unzoomed body {
 
 h1,
 h2 {
-  font-family: var(--header);
+  font-family: var(--display);
   font-weight: normal;
 }
 
@@ -129,7 +157,7 @@ h2 {
 }
 
 p {
-  font-family: var(--body);
+  font-family: var(--sans);
   font-size: 1.1rem;
   hyphens: auto;
   line-height: 1.5;
@@ -138,7 +166,7 @@ p {
 
 small,
 li {
-  font-family: var(--body);
+  font-family: var(--sans);
 }
 
 /* Navigation Bar */
@@ -149,12 +177,12 @@ li {
 }
 
 .navbar__title {
-  font-family: var(--header);
+  font-family: var(--display);
   font-size: 1.3rem;
 }
 
 .navbar__menu {
-  font-family: var(--body);
+  font-family: var(--sans);
   font-size: 1.1rem;
   text-align: right;
 }
@@ -188,7 +216,7 @@ li {
   background-color: #584966;
   color: var(--text);
   border-radius: 6px;
-  font-family: var(--body);
+  font-family: var(--technical);
   font-weight: 600;
   font-size: .85rem;
   padding: 0.3em 0.6em 0.2em;
@@ -206,7 +234,9 @@ li {
 
 .badge--item {
   border-radius: 4px;
+  font-family: var(--mono);
   font-size: 0.7rem;
+  letter-spacing: 0.05em;
   margin-right: 5px;
   padding: 0.5em 0.3em 0.3em 0.3em;
 }
@@ -242,7 +272,7 @@ li {
 
 .card__title {
   margin: 0;
-  font-family: var(--body);
+  font-family: var(--technical);
   font-size: 1.5rem;
   font-weight: normal;
   text-align: center;
@@ -473,4 +503,21 @@ html.light {
     height: auto;
     width: 350px;
   }
+}
+
+/* The UT mode.
+ *
+ * Elements marked developer-only are hidden in production and shown
+ * when the site is in the testing mode. The mode is set by the page
+ * from the hostname, so nothing here depends on the server.
+ *
+ * This is at the end of the stylesheet because the elements it hides
+ * carry their own display rules, and those have to be overridden by
+ * something that comes later. */
+.dev-only {
+  display: none;
+}
+
+:root.ut .dev-only {
+  display: revert;
 }
