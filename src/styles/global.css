@@ -29,6 +29,10 @@
   --celestial-gold: #ffcb8d;
   --celestial-gold-dark: #dca462;
 
+  /* The colour of the display text — the headings and the site title.
+   * A typography option may change it. */
+  --display-colour: var(--text);
+
   /* Backdrop
    *
    * One image carries both scenes. The theme picks which half is
@@ -65,6 +69,18 @@ html.option1 {
   --technical: 'Space Grotesk', sans-serif;
   --mono: 'JetBrains Mono', monospace;
   --underline: var(--celestial-gold);
+}
+
+/* Option two — the same faces as option one, with the celestial gold
+ * on the display text. The headings and the site title are written in
+ * gold; the rest of the palette is untouched. */
+html.option2 {
+  --display: 'Cinzel Decorative', serif;
+  --sans: 'Inter', sans-serif;
+  --technical: 'Space Grotesk', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --underline: var(--celestial-gold);
+  --display-colour: var(--celestial-gold);
 }
 
 html {
@@ -140,6 +156,7 @@ h1,
 h2 {
   font-family: var(--display);
   font-weight: normal;
+  color: var(--display-colour);
 }
 
 h1 {
@@ -178,6 +195,7 @@ li {
 
 .navbar__title {
   font-family: var(--display);
+  color: var(--display-colour);
   font-size: 1.3rem;
 }
 
