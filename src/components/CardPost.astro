@@ -4,12 +4,14 @@ interface Props {
     image: string;
     title: string;
     date: string;
+    // A draft is only shown in the UT mode.
+    draft?: boolean;
 }
 
-const { url, image, title, date } = Astro.props;
+const { url, image, title, date, draft = false } = Astro.props;
 ---
 
-<li class="card">
+<li class:list={["card", { "dev-only": draft }]}>
     <a class="card__link" href={url}>
         <div class="center">
             <img

@@ -2,7 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
-const { pageTitle, zoomed = false } = Astro.props;
+const { pageTitle, zoomed = false, candidates = false } = Astro.props;
 ---
 <!DOCTYPE html>
 <html transition:animate="none" lang="en" class:list={{ unzoomed: !zoomed }}>
@@ -15,8 +15,72 @@ const { pageTitle, zoomed = false } = Astro.props;
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;600&display=swap" as="style">
         <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+        <!--
+            The faces the typography options use. They are loaded for
+            every page, because the option is chosen by a cookie and
+            the page does not know which it is until it runs.
+        -->
+        <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500;700&family=Oxanium:wght@200;300;400;500;600;700;800&display=swap" as="style">
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500;700&family=Oxanium:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+        <!--
+            The candidate display faces, for the type comparison post.
+            They are loaded only on the page that asks for them, so the
+            rest of the site does not pay for them.
+        -->
+        {candidates && (
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Marcellus&family=Spectral:wght@200;300;400;500;600&family=Sora:wght@100;200;300;400;500;600;700;800&family=Manrope:wght@200;300;400;500;600;700;800&family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Chivo:wght@100;200;300;400;500;600;700;800;900&family=Archivo:wght@100;200;300;400;500;600;700;800;900&display=swap">
+        )}
         <meta name="generator" content={Astro.generator} />
         <title>{pageTitle}</title>
+
+        <!--
+            The mode cookies.
+
+            The site has two modes, production and UT, and the UT mode
+            shows the developer-only elements and the draft content.
+
+            The typography options work the same way. Each one is a
+            class on the html element, and the cookie's value is the
+            class name.
+
+            Both are read from cookies, so they can be switched in the
+            browser without a rebuild, and they follow you across every
+            page and every host of the site.
+
+            The cookies are set by hand, from the browser console:
+
+                document.cookie = "ut=1; path=/"
+                document.cookie = "typography=option1; path=/"
+
+            and cleared with:
+
+                document.cookie = "ut=; path=/; expires=Thu, 01 Jan 1970"
+                document.cookie = "typography=; path=/; expires=Thu, 01 Jan 1970"
+
+            This runs in the head, before the body is drawn, so the
+            page does not flash the wrong mode first.
+        -->
+        <script is:inline>
+            (() => {
+                const cookies = document.cookie.split("; ");
+
+                const ut = cookies.find((entry) => entry.startsWith("ut="));
+                if (ut === "ut=1") {
+                    document.documentElement.classList.add("ut");
+                }
+
+                const typography = cookies.find((entry) =>
+                    entry.startsWith("typography="));
+                if (typography) {
+                    const option = typography.slice("typography=".length);
+                    if (option) {
+                        document.documentElement.classList.add(option);
+                    }
+                }
+            })();
+        </script>
 	</head>
 	<body>
         <Header />

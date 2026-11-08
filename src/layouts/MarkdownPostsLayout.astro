@@ -1,13 +1,12 @@
 ---
 import BaseLayout from "./Layout.astro";
+import Banner from "../components/Banner.astro";
 const { frontmatter } = Astro.props;
 ---
 
-<BaseLayout pageTitle={frontmatter.title} zoomed>
-    <div class="gif">
-        <img src="/images/blog.webp" role="presentation" width="300" height="259" decoding="async">
-    </div>
-    <h2 style="text-decoration:none;">{frontmatter.title}</h2>
+<BaseLayout pageTitle={frontmatter.title} zoomed candidates={frontmatter.candidates}>
+    <Banner name={frontmatter.banner?.name} alt={frontmatter.banner?.alt} />
+    <h1>{frontmatter.title}</h1>
     <ul class="badge__list">
         <li>
             <span class="badge badge--item">AUTHOR</span>{frontmatter.author}

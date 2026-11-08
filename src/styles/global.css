@@ -1,4 +1,18 @@
 /* Global styles */
+/* 13 Misa, by Zane Townsend of the Unrender Font Foundry.
+ *
+ * A display face only — one weight, no italic. It is here for the
+ * type comparison post, and is served from the site rather than from
+ * a font CDN because the licence asks for the files to travel
+ * together. */
+@font-face {
+  font-family: '13 Misa';
+  src: url('/fonts/13misa/13_Misa.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --background: #0a1017;
   --background-light: #f4f7fa;
@@ -8,8 +22,79 @@
   --text-link: #7ee0c2;
   --text-link-light: #1f6b56;
   --underline: #ffcb8d;
-  --header: 'Fraunces', Georgia, serif;
   --body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* The typography options.
+   *
+   * A typography option is chosen with the "typography" cookie, and
+   * each one is a class on the html element. The cookie's value is the
+   * class name, so "typography=option1" gives html.option1.
+   *
+   * The faces are named here and loaded from Google Fonts in the
+   * layout. */
+  --display: 'Oxanium', sans-serif;
+  --sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --technical: 'Space Grotesk', sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* The site chrome — the site title and the menu bar.
+   *
+   * The chrome carries the identity of the site, so it is set apart
+   * from the display face that carries the article titles. It is
+   * Oxanium at its lightest weight, in caps.
+   *
+   * The chrome is set once here and every typography option inherits
+   * it, so the options vary the page rather than the site's identity. */
+  --chrome: 'Oxanium', sans-serif;
+  --chrome-weight: 200;
+  --chrome-tracking: 0.06em;
+
+  /* How far short of the viewport edge the menu bar's right end
+   * stops. */
+  --chrome-inset: 3rem;
+
+  /* The celestial gold, in three tones. */
+  --celestial-gold-light: #fff2cc;
+  --celestial-gold: #ffcb8d;
+  --celestial-gold-dark: #dca462;
+
+  /* The colour of the display text — the headings and the site title.
+   * A typography option may change it.
+   *
+   * The light theme has its own value, because the default is the
+   * dark theme's text colour, which is unreadable on the light
+   * ground. */
+  --display-colour: var(--text);
+  --display-colour-light: var(--text-light);
+
+  /* The emboss.
+   *
+   * A shadow below and a highlight above make the text look pressed
+   * into the page; the reverse makes it look raised. A typography
+   * option may change the effect, or set it to none.
+   *
+   * The highlight is the light tone of the celestial gold, so the
+   * emboss is lit by the same gold that colours the underlines. It
+   * is expressed as a mix rather than a literal, so the ramp stays
+   * the one place the gold is defined. */
+  --emboss-shadow: none;
+  --emboss-highlight: none;
+
+  /* The emboss as the light theme wants it. A shadow that is dark
+   * on the dark ground becomes a highlight on the light one, so the
+   * text stays pressed into the page in both themes. */
+  --emboss-shadow-light: none;
+  --emboss-highlight-light: none;
+
+  /* The optical size axis of the display face. Fraunces is drawn
+   * for two sizes: a high-contrast cut for display, and a sturdier
+   * cut for running text. Headings take the high-contrast cut;
+   * anything smaller keeps the default. */
+  --display-opsz: normal;
+
+  /* The weight of the article titles. The chrome has its own weight,
+   * because the site title is lighter than the titles it sits above. */
+  --title-weight: 400;
 
   /* Backdrop
    *
@@ -37,6 +122,94 @@
   syntax: '<percentage>';
   inherits: true;
   initial-value: 100%;
+}
+
+/* Option one — the display face is decorative, the technical face is a
+ * grotesque, and the body stays sans.
+ *
+ * The chrome is inherited from the default, so it is Oxanium here as it
+ * is everywhere. */
+html.option1 {
+  --display: 'Oxanium', sans-serif;
+  --sans: 'Inter', sans-serif;
+  --technical: 'Space Grotesk', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --underline: var(--celestial-gold);
+}
+
+/* Option two — the same faces as option one, with the celestial gold
+ * on the display text. The headings and the site title are written in
+ * gold; the rest of the palette is untouched. */
+html.option2 {
+  --display: 'Oxanium', sans-serif;
+  --sans: 'Inter', sans-serif;
+  --technical: 'Space Grotesk', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --underline: var(--celestial-gold);
+  --display-colour: var(--celestial-gold);
+
+  /* Pressed into the page: a dark shadow above the letterform and a
+   * light one below, so the text looks cut into the surface rather
+   * than laid on it. The highlight is the light tone of the gold. */
+  --emboss-shadow: 0 -1px 1px rgba(0, 0, 0, 0.55);
+  --emboss-highlight: 0 1px 1px color-mix(in srgb, var(--celestial-gold-light) 75%, transparent);
+
+  /* On the light ground the same effect is made with a white
+   * shadow above and a dark one below. */
+  --emboss-shadow-light: 0 -1px 1px color-mix(in srgb, #ffffff 80%, transparent);
+  --emboss-highlight-light: 0 1px 1px rgba(0, 0, 0, 0.35);
+}
+
+/* Option three — Fraunces at its high-contrast optical size carries
+ * the display work, Space Grotesk carries the technical, and the body
+ * and the badges stay as they were. The celestial gold underlines and
+ * the emboss are kept. */
+html.option3 {
+  --display: 'Fraunces', Georgia, serif;
+  --sans: 'Inter', sans-serif;
+  --technical: 'Space Grotesk', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --underline: var(--celestial-gold);
+  --display-opsz: 144;
+
+  /* Pressed into the page: a dark shadow above the letterform and a
+   * light one below, so the text looks cut into the surface rather
+   * than laid on it. The highlight is the light tone of the gold. */
+  --emboss-shadow: 0 -1px 1px rgba(0, 0, 0, 0.55);
+  --emboss-highlight: 0 1px 1px color-mix(in srgb, var(--celestial-gold-light) 75%, transparent);
+
+  /* On the light ground the same effect is made with a white
+   * shadow above and a dark one below. */
+  --emboss-shadow-light: 0 -1px 1px color-mix(in srgb, #ffffff 80%, transparent);
+  --emboss-highlight-light: 0 1px 1px rgba(0, 0, 0, 0.35);
+}
+
+/* Option four — Oxanium, at its lightest weight.
+ *
+ * Oxanium is square and bevelled: the letterforms are cut rather
+ * than drawn, which reads as machined. At weight 200 the strokes
+ * are hairline, and the bevels catch the light — the face looks
+ * etched rather than printed.
+ *
+ * The gold underline and the emboss are kept. */
+html.option4 {
+  --display: 'Oxanium', sans-serif;
+  --sans: 'Inter', sans-serif;
+  --technical: 'Space Grotesk', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --underline: var(--celestial-gold);
+  --title-weight: 200;
+
+  /* Pressed into the page: a dark shadow above the letterform and a
+   * light one below, so the text looks cut into the surface rather
+   * than laid on it. The highlight is the light tone of the gold. */
+  --emboss-shadow: 0 -1px 1px rgba(0, 0, 0, 0.55);
+  --emboss-highlight: 0 1px 1px color-mix(in srgb, var(--celestial-gold-light) 75%, transparent);
+
+  /* On the light ground the same effect is made with a white
+   * shadow above and a dark one below. */
+  --emboss-shadow-light: 0 -1px 1px color-mix(in srgb, #ffffff 80%, transparent);
+  --emboss-highlight-light: 0 1px 1px rgba(0, 0, 0, 0.35);
 }
 
 html {
@@ -110,8 +283,11 @@ html.unzoomed body {
 
 h1,
 h2 {
-  font-family: var(--header);
-  font-weight: normal;
+  font-family: var(--display);
+  font-weight: var(--title-weight);
+  color: var(--display-colour);
+  font-variation-settings: 'opsz' var(--display-opsz);
+  text-shadow: var(--emboss-shadow), var(--emboss-highlight);
 }
 
 h1 {
@@ -128,8 +304,39 @@ h2 {
   margin-bottom: 0;
 }
 
+/* The headings inside an article are set in the grotesque.
+ *
+ * The article title above them is the display face, so the page has
+ * a voice at the top and a quieter voice in the body. The grotesque
+ * is the technical face, which is what the section headings are
+ * about — they mark the structure rather than the argument.
+ *
+ * Each level steps down in size, and only the section heading
+ * carries the underline: the deeper levels are marks within a
+ * section, not the sections themselves. */
+.prose h2 {
+  font-family: var(--technical);
+  font-weight: 500;
+}
+
+.prose h3 {
+  font-family: var(--technical);
+  font-weight: 500;
+  font-size: 1.5rem;
+  margin-top: 1.6rem;
+  margin-bottom: 0;
+}
+
+.prose h4 {
+  font-family: var(--technical);
+  font-weight: 500;
+  font-size: 1.2rem;
+  margin-top: 1.4rem;
+  margin-bottom: 0;
+}
+
 p {
-  font-family: var(--body);
+  font-family: var(--sans);
   font-size: 1.1rem;
   hyphens: auto;
   line-height: 1.5;
@@ -138,25 +345,84 @@ p {
 
 small,
 li {
-  font-family: var(--body);
+  font-family: var(--sans);
 }
 
-/* Navigation Bar */
+/* The Navigation Bar */
+
+/* The header is the chrome, and it is not bound by the content
+ * column — it spans the viewport.
+ *
+ * The body is the content column: it is capped and centred. The
+ * header sits inside the body in the markup, so it is pulled back
+ * out to the full width of the viewport and given its own padding.
+ *
+ * Inside that, the bar's left end lines up with the text column
+ * below it, and its right end is free — the menu is allowed to run
+ * out past the column rather than being pinned to it.
+ *
+ * The bar is aligned to the content column on the left and allowed
+ * to run off to the right, so the title keeps its place and the
+ * menu gets the room it needs. */
+header {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+/* The bar keeps the content column's width and its centring, so the
+ * site title lines up with the text below it exactly as it always
+ * did. Only the right end is freed: the menu is pushed out into the
+ * gutter, stopping short of the viewport edge by --chrome-inset. */
 .navbar {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
   margin-top: 0.8rem;
-}
-
-.navbar__title {
-  font-family: var(--header);
-  font-size: 1.3rem;
+  max-width: 756px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .navbar__menu {
-  font-family: var(--body);
+  justify-self: end;
+  width: max-content;
+  margin-right: calc((756px - 100vw) / 2 + 1rem + var(--chrome-inset));
+}
+
+/* On the pages where the content keeps the narrower measure, the bar
+ * is inset by that column instead. */
+html.unzoomed .navbar {
+  max-width: 540px;
+}
+
+html.unzoomed .navbar__menu {
+  margin-right: calc((540px - 100vw) / 2 + 1rem + var(--chrome-inset));
+}
+
+/* The site title is the chrome: Oxanium at its lightest weight, in
+ * caps. It is the one voice that does not change with the typography
+ * option, because it is the mark of the site rather than the voice
+ * of the page. */
+.navbar__title {
+  font-family: var(--chrome);
+  font-weight: var(--chrome-weight);
+  color: var(--display-colour);
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: var(--chrome-tracking);
+  text-shadow: var(--emboss-shadow), var(--emboss-highlight);
+  white-space: nowrap;
+}
+
+.navbar__menu {
+  font-family: var(--chrome);
+  font-weight: var(--chrome-weight);
   font-size: 1.1rem;
   text-align: right;
+  text-transform: uppercase;
+  letter-spacing: var(--chrome-tracking);
 }
 
 .navbar__title>a,
@@ -188,7 +454,7 @@ li {
   background-color: #584966;
   color: var(--text);
   border-radius: 6px;
-  font-family: var(--body);
+  font-family: var(--technical);
   font-weight: 600;
   font-size: .85rem;
   padding: 0.3em 0.6em 0.2em;
@@ -206,7 +472,9 @@ li {
 
 .badge--item {
   border-radius: 4px;
+  font-family: var(--mono);
   font-size: 0.7rem;
+  letter-spacing: 0.05em;
   margin-right: 5px;
   padding: 0.5em 0.3em 0.3em 0.3em;
 }
@@ -240,11 +508,13 @@ li {
   border-radius: 16px;
 }
 
+/* The card title is the display face, the same one the page it
+ * leads to is titled in. */
 .card__title {
   margin: 0;
-  font-family: var(--body);
+  font-family: var(--display);
   font-size: 1.5rem;
-  font-weight: normal;
+  font-weight: var(--title-weight);
   text-align: center;
 }
 
@@ -378,6 +648,14 @@ html.light {
   background-color: var(--background-light);
   color: var(--text-light);
   background-position: center top;
+
+  /* The display text follows the theme, unless the typography
+   * option has set the gold for it. */
+  --display-colour: var(--display-colour-light);
+
+  /* The emboss turns the other way round on the light ground. */
+  --emboss-shadow: var(--emboss-shadow-light);
+  --emboss-highlight: var(--emboss-highlight-light);
 }
 
 .light .navbar__title>a {
@@ -448,6 +726,7 @@ html.light {
 
   .navbar__title {
     text-align: center;
+    white-space: normal;
   }
 
   .navbar__menu {
@@ -473,4 +752,85 @@ html.light {
     height: auto;
     width: 350px;
   }
+}
+
+/* The UT mode.
+ *
+ * Elements marked developer-only are hidden in production and shown
+ * when the site is in the testing mode. The mode is set by the page
+ * from the hostname, so nothing here depends on the server.
+ *
+ * This is at the end of the stylesheet because the elements it hides
+ * carry their own display rules, and those have to be overridden by
+ * something that comes later. */
+.dev-only {
+  display: none;
+}
+
+:root.ut .dev-only {
+  display: revert;
+}
+
+/* The type sampler.
+ *
+ * A row for each candidate face: the name and a note on the left, the
+ * face rendered at heading size on the right. The samples carry the
+ * gold underline, because that is what the headings carry. */
+.type-sampler {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  margin: 1.5rem 0;
+}
+
+.type-sampler__row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--text) 20%, transparent);
+}
+
+.type-sampler__row:last-child {
+  border-bottom: none;
+}
+
+.type-sampler__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.type-sampler__name {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-link);
+}
+
+.type-sampler__note {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--text);
+  opacity: 0.75;
+  text-indent: 0;
+}
+
+.type-sampler__sample {
+  font-size: 2.1rem;
+  line-height: 1.25;
+  text-decoration: underline var(--underline);
+  text-decoration-thickness: 4px;
+  text-underline-offset: 6px;
+  color: var(--display-colour);
+}
+
+.light .type-sampler__note {
+  color: var(--text-light);
+}
+
+.light .type-sampler__row {
+  border-bottom-color: color-mix(in srgb, var(--text-light) 20%, transparent);
 }
