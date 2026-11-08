@@ -1,0 +1,128 @@
+---
+/*
+ * The warrior banner.
+ *
+ * The artwork is in two layers: the cloud behind, and the warrior at
+ * the desk in front.
+ *
+ * The cloud is an SVG of overlapping radial gradients rather than a
+ * picture. That matters for two reasons. It is a fifteenth of the size
+ * of the raster it replaces, and — because a gradient has no key
+ * colour in it — it cannot show the pink fringe that a chroma-keyed
+ * image leaves at its edges.
+ *
+ * Each piece of artwork gets its own component, because each needs its
+ * own tweaking. This one owns its own CSS rather than putting it in
+ * the global stylesheet.
+ */
+interface Props {
+    alt?: string;
+}
+
+const { alt = "" } = Astro.props;
+---
+
+<div class="banner">
+    <div class="banner__back" role="presentation"></div>
+    <img
+        class="banner__front"
+        src="/images/banner-warrior-front.webp"
+        alt={alt}
+    />
+</div>
+
+<style>
+    .banner {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        margin: 20px auto 1rem;
+        line-height: 0;
+
+        /*
+         * Both layers are out of the flow, so the container has no
+         * height of its own. The artwork's proportions give it one.
+         */
+        aspect-ratio: 1087 / 630;
+
+        /*
+         * The artwork runs off the bottom of its frame, so the bottom
+         * edge would otherwise be a hard line across the page. The mask
+         * fades it out and the banner dissolves into the page.
+         *
+         * The cloud spreads the full width of the banner, so both sides
+         * need fading too, or it ends in a hard edge. The side gradient
+         * is transparent at each end and solid in the middle, so it
+         * fades both edges at once.
+         *
+         * The two masks are intersected: the bottom fade and the side
+         * fade together.
+         *
+         * The mask is on the container rather than on the layers, so
+         * both fade together and the cloud cannot show past the
+         * figure.
+         */
+        -webkit-mask-image:
+            linear-gradient(to bottom, #000 80%, transparent 100%),
+            linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%);
+        -webkit-mask-composite: source-in;
+        mask-image:
+            linear-gradient(to bottom, #000 80%, transparent 100%),
+            linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%);
+        mask-composite: intersect;
+    }
+
+    /*
+     * The two layers are the same size and sit on top of each other,
+     * so they have to be stacked rather than laid out in a row.
+     *
+     * Both are positioned, and both carry an explicit z-index. That
+     * matters: an absolutely positioned element with z-index auto
+     * paints above in-flow content, so leaving the front layer static
+     * would put the cloud on top of the figure. The depths say which
+     * is which.
+     */
+    .banner__back,
+    .banner__front {
+        position: absolute;
+        inset: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    .banner__back {
+        z-index: 0;
+
+        /*
+         * The cloud is drawn in the SVG's own colours. The tint is a
+         * filter rather than a change to the file, so the same drawing
+         * serves both grounds.
+         *
+         * The cloud sits behind the figure and reads as mass, so it is
+         * darker than the drawing on both grounds. On the dark ground
+         * it has to be lifted a little, or it disappears into the sky;
+         * on the light ground it has to come down, or it reads as a
+         * smudge rather than a cloud.
+         */
+        background: url('/images/banner-warrior-back.svg') no-repeat center / 100% 100%;
+        filter: brightness(0.72) saturate(0.85);
+    }
+
+    .banner__front {
+        z-index: 1;
+        object-fit: contain;
+
+        /*
+         * The figure is drawn smaller than the banner, and sits on the
+         * cloud rather than filling the frame. The cloud keeps the full
+         * width of the banner, so the figure reads as standing on it.
+         */
+        transform: scale(0.7);
+        transform-origin: center bottom;
+    }
+
+    :global(.light) .banner__back {
+        filter: brightness(0.88) saturate(0.7);
+    }
+</style>

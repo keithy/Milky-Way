@@ -1,0 +1,41 @@
+---
+/*
+ * The banner at the top of a post.
+ *
+ * A post names its banner in its front matter, and the name picks the
+ * component that renders it. Each piece of artwork has its own
+ * component under banners/, because each one needs its own tweaking —
+ * its own layering, its own fade, its own tint for the theme.
+ *
+ * Adding a piece of artwork means adding a component and one line to
+ * the registry below.
+ */
+import Warrior from './banners/Warrior.astro';
+
+interface Props {
+    name?: string;
+    alt?: string;
+}
+
+const { name = 'warrior', alt = '' } = Astro.props;
+
+const banners = {
+    warrior: Warrior,
+};
+
+/*
+ * A name that is not in the registry is a mistake in a post's front
+ * matter, so it fails the build rather than quietly falling back to
+ * the default. A silent fallback would leave the post showing the
+ * wrong artwork with nothing to say so.
+ */
+const Banner = banners[name];
+
+if (!Banner) {
+    throw new Error(
+        `Unknown banner "${name}". The known banners are: ${Object.keys(banners).join(', ')}.`
+    );
+}
+---
+
+<Banner alt={alt} />
