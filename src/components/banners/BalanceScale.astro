@@ -1,0 +1,218 @@
+---
+/*
+ * The balance.
+ *
+ * A scale with two pans, one of them low and one of them high, and an
+ * icon in each. The icon in the high pan glows: the rising side is the
+ * one worth looking at.
+ *
+ * The scale is a picture and the cloud behind it is drawn, so the two
+ * are separate layers. The pans are at fixed places in the drawing, and
+ * the icons are placed at those places.
+ *
+ * Three things come from outside: which way the scale tips, the icon
+ * for the left pan, and the icon for the right pan. Each tilt is its
+ * own component — BalanceEven, BalanceDownLeft, BalanceDownRight — so
+ * that a post names the banner it wants and the tilt is not a
+ * parameter that can be set to a value nobody thought of.
+ */
+import Cloud from './Cloud.astro';
+import { iconFor } from './icons';
+
+interface Props {
+    /*
+     * Which way the scale tips.
+     *
+     * "even" is a level scale. "down-left" tips toward the left, so the
+     * left pan is the low one. "down-right" tips toward the right.
+     */
+    tilt: 'even' | 'down-left' | 'down-right';
+
+    alt?: string;
+
+    /*
+     * The icons in the pans, named. The left icon goes in the left pan
+     * and the right icon goes in the right pan, whichever way the scale
+     * tips. Either may be left out.
+     */
+    icons?: {
+        left?: string;
+        right?: string;
+    };
+}
+
+const { tilt, alt = '', icons = {} } = Astro.props;
+
+const leftIcon = icons.left ? iconFor(icons.left) : undefined;
+const rightIcon = icons.right ? iconFor(icons.right) : undefined;
+
+/*
+ * The artwork.
+ *
+ * The level scale is a separate drawing. The tipped scale is the one
+ * picture, and it is turned on its side for the other tilt — a mirror
+ * is cheaper than a second picture, and the drawing is near enough
+ * symmetrical that it does not show.
+ */
+const scaleSrc =
+    tilt === 'even'
+        ? '/images/banners/banner-balance-level.webp'
+        : '/images/banners/banner-balance-tipped.webp';
+
+const mirrored = tilt === 'down-right';
+
+/*
+ * Where the pans are.
+ *
+ * The numbers are the centre of each pan in the banner's own pixels,
+ * and the rim is where the bottom of an icon sits — at the rim of the
+ * pan, so the icon rests in the bowl rather than sinking into it.
+ *
+ * The measurements come from the artwork. The scale is drawn at two
+ * hundred and forty-two by one hundred and ninety, with its foot at one
+ * hundred and ninety so that the top of the drawing reaches the top of
+ * the banner, and the pans are at these places in that drawing.
+ */
+const pans = {
+    'even': {
+        left: { x: 194, rim: 90 },
+        right: { x: 346, rim: 90 },
+    },
+    'down-left': {
+        left: { x: 192, rim: 61 },
+        right: { x: 348, rim: 113 },
+    },
+    'down-right': {
+        left: { x: 192, rim: 113 },
+        right: { x: 348, rim: 61 },
+    },
+} as const;
+
+const pan = pans[tilt];
+
+/*
+ * The pan that is high, and so gets the glow. On a level scale both
+ * pans are the same height, so neither is higher and neither glows.
+ */
+const highSide = tilt === 'even' ? undefined : tilt === 'down-left' ? 'right' : 'left';
+---
+
+<div class="banner">
+    <Cloud center={270} baseline={220} width={200} height={0.42} />
+    <img
+        class:list={["banner__scale", mirrored && "banner__scale--mirrored"]}
+        src={scaleSrc}
+        alt={alt}
+    />
+    {
+        leftIcon && (
+            <span
+                class:list={["banner__icon", "banner__icon--left", highSide === 'left' && "banner__icon--glow"]}
+                style={`left:${pan.left.x}px; bottom:${pan.left.rim}px;`}
+            >
+                <img src={leftIcon.src} alt={leftIcon.alt} />
+            </span>
+        )
+    }
+    {
+        rightIcon && (
+            <span
+                class:list={["banner__icon", "banner__icon--right", highSide === 'right' && "banner__icon--glow"]}
+                style={`left:${pan.right.x}px; bottom:${pan.right.rim}px;`}
+            >
+                <img src={rightIcon.src} alt={rightIcon.alt} />
+            </span>
+        )
+    }
+</div>
+
+<style>
+    /*
+     * The banner is a fixed space on the page: five hundred and forty by
+     * two hundred and twenty. The cloud fills it, and the scale stands
+     * on it.
+     */
+    .banner {
+        position: relative;
+        width: 540px;
+        max-width: 100%;
+        aspect-ratio: 540 / 220;
+        margin: 20px auto 1rem;
+        line-height: 0;
+        overflow: hidden;
+    }
+
+    /*
+     * The layers are stacked rather than laid out in a row, and each
+     * carries an explicit z-index. That matters: an absolutely
+     * positioned element with z-index auto paints above in-flow
+     * content, so leaving the scale static would put the cloud on top
+     * of it. The depths say which is which.
+     */
+    .banner__scale,
+    .banner__icon {
+        position: absolute;
+        display: block;
+    }
+
+    /*
+     * The scale is drawn at two hundred and forty-two by one hundred and
+     * ninety. Its foot is at one hundred and ninety, so the top of the
+     * drawing reaches the top of the banner and the cloud has room to
+     * be underneath it.
+     *
+     * The drawing is bigger than that and is scaled down to fit, so it
+     * is twice the resolution of the banner it goes in.
+     */
+    .banner__scale {
+        z-index: 1;
+        width: 242px;
+        height: 190px;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+    }
+
+    /*
+     * The right-hand tilt is the left-hand one turned on its side. The
+     * mirror is applied on its own, so that the centring above and the
+     * flip below do not fight over the transform.
+     */
+    .banner__scale--mirrored {
+        transform: translateX(-50%) scaleX(-1);
+    }
+
+    /*
+     * The icons.
+     *
+     * They are placed by the measurement of the artwork, so the
+     * position of an icon is set in the markup rather than in a
+     * stylesheet.
+     *
+     * The icon is centred on its pan with a translate, because the
+     * measurement is of the pan's centre and the icon's own width is
+     * not known until it is drawn.
+     */
+    .banner__icon {
+        z-index: 2;
+        transform: translateX(-50%);
+    }
+
+    .banner__icon img {
+        display: block;
+        width: 46px;
+        height: auto;
+    }
+
+    /*
+     * The icon in the high pan glows.
+     *
+     * The glow is a drop-shadow rather than a box-shadow, so it follows
+     * the shape of the icon rather than the shape of its box — Tux's
+     * beak and feet glow, and the space between them does not.
+     */
+    .banner__icon--glow img {
+        filter: drop-shadow(0 0 4px var(--celestial-gold))
+                drop-shadow(0 0 10px var(--celestial-gold));
+    }
+</style>

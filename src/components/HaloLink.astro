@@ -1,0 +1,79 @@
+---
+/*
+ * A menu item whose first character carries a golden halo.
+ *
+ * The halo sits above the letter, as if the character were catching the
+ * light. It is drawn as a radial gradient on a pseudo-element rather
+ * than as a shadow on the text, because a text-shadow cannot be put
+ * above the letter without also darkening what is behind it.
+ *
+ * The first character is split into its own span so that it can be
+ * positioned against. A ::first-letter would do the same thing, but it
+ * only works when the character is the first thing in an element, and
+ * here the letter is inside a link that has other content.
+ */
+interface Props {
+    href: string;
+    label: string;
+}
+
+const { href, label } = Astro.props;
+const [first, ...rest] = label;
+---
+
+<a href={href}>
+    <span class="halo">{first}</span>{rest.join("")}
+</a>
+
+<style>
+    .halo {
+        position: relative;
+        display: inline-block;
+    }
+
+    /*
+     * The halo. It is a clear oval above the letter — a ring, set at an
+     * angle, as though it were catching the light.
+     *
+     * It is sized in pixels rather than in em, so that it is the same
+     * size over every item. The site title is set larger than the menu
+     * items, and a halo that grew with it would not sit the same way on
+     * each of them.
+     */
+    .halo::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 62%;
+        width: 17px;
+        height: 8px;
+        transform: translate(-58%, 0) rotate(-20deg);
+        border: 3px solid var(--celestial-gold-light);
+        border-radius: 50%;
+        opacity: 0;
+        transition: opacity 200ms ease-out;
+        pointer-events: none;
+    }
+
+    /*
+     * The halo appears when the item is hovered or focused. It fades in
+     * rather than switching on, so it reads as light rather than as a
+     * graphic.
+     */
+    a:hover .halo::before,
+    a:focus .halo::before,
+    a:focus-visible .halo::before {
+        opacity: 1;
+    }
+
+    /*
+     * The glow is movement of light across the page, and people who have
+     * asked their system to reduce motion should get it without the
+     * transition.
+     */
+    @media (prefers-reduced-motion: reduce) {
+        .halo::before {
+            transition: none;
+        }
+    }
+</style>

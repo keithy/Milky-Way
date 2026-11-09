@@ -1,0 +1,20 @@
+---
+/*
+ * A balance that hangs level.
+ *
+ * Neither pan is higher than the other, so neither of the icons glows.
+ */
+import BalanceScale from './BalanceScale.astro';
+
+interface Props {
+    alt?: string;
+    icons?: {
+        left?: string;
+        right?: string;
+    };
+}
+
+const { alt = '', icons = {} } = Astro.props;
+---
+
+<BalanceScale tilt="even" alt={alt} icons={icons} />

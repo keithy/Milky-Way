@@ -435,13 +435,10 @@ html.unzoomed .navbar__menu {
   margin: 0 10px;
 }
 
-.navbar__title>a:hover,
-.navbar__menu>a:hover,
-.navbar__menu>a:focus {
-  text-decoration: underline var(--underline);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 6px;
-}
+/*
+ * The menu items and the site title carry a golden halo above their
+ * first character instead of an underline.
+ */
 
 /* Gifs */
 .gif {
@@ -609,7 +606,7 @@ footer {
 }
 
 .git-icon {
-  content: url("/images/github-mark-white.svg");
+  content: url("/images/gitlab-mark.svg");
 }
 
 .mail-icon {
@@ -690,8 +687,13 @@ html.light {
   border-color: var(--text-link);
 }
 
+/*
+ * The GitLab mark is white on the dark ground and dark on the light
+ * one, so it has a variant for each — as the other two icons do.
+ */
+
 .light .git-icon {
-  content: url("/images/github-mark.svg");
+  content: url("/images/gitlab-mark-dark.svg");
 }
 
 .light .mail-icon {

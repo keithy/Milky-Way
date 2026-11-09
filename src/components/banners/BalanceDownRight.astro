@@ -1,0 +1,21 @@
+---
+/*
+ * A balance that tips toward the right.
+ *
+ * The right pan is the low one and the left pan is the high one, so the
+ * icon on the left glows.
+ */
+import BalanceScale from './BalanceScale.astro';
+
+interface Props {
+    alt?: string;
+    icons?: {
+        left?: string;
+        right?: string;
+    };
+}
+
+const { alt = '', icons = {} } = Astro.props;
+---
+
+<BalanceScale tilt="down-right" alt={alt} icons={icons} />

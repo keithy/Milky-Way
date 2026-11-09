@@ -1,0 +1,44 @@
+---
+/*
+ * The Angelic Warrior — the mascot.
+ *
+ * He is a flying figure: narrow at the head, spreading wide through the
+ * arms and the cape, narrowing again at the legs. The artwork came with
+ * its own transparency, so unlike the seated warrior it needs no keying
+ * and no cloud behind it.
+ *
+ * Like every piece of artwork on the site, he gets his own component and
+ * owns his own CSS, so that he can be tweaked without touching anything
+ * else.
+ */
+interface Props {
+    alt?: string;
+    class?: string;
+}
+
+const { alt = "", class: className = "" } = Astro.props;
+---
+
+<div class:list={["mascot", className]}>
+    <img class="mascot__figure" src="/images/mascot.webp" alt={alt} />
+</div>
+
+<style>
+    .mascot {
+        display: block;
+        line-height: 0;
+        text-align: center;
+    }
+
+    /*
+     * The figure. He is drawn at the size his artwork gives him and is
+     * allowed to grow with the column, but never wider than it.
+     */
+    .mascot__figure {
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 420px;
+        height: auto;
+    }
+</style>

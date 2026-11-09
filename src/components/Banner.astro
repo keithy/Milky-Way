@@ -11,16 +11,30 @@
  * the registry below.
  */
 import Warrior from './banners/Warrior.astro';
+import BalanceEven from './banners/BalanceEven.astro';
+import BalanceDownLeft from './banners/BalanceDownLeft.astro';
+import BalanceDownRight from './banners/BalanceDownRight.astro';
 
 interface Props {
     name?: string;
     alt?: string;
+    /*
+     * The icons for a banner that has pans to fill. A banner without
+     * pans ignores them.
+     */
+    icons?: {
+        left?: string;
+        right?: string;
+    };
 }
 
-const { name = 'warrior', alt = '' } = Astro.props;
+const { name = 'warrior', alt = '', icons = {} } = Astro.props;
 
 const banners = {
     warrior: Warrior,
+    'balance-even': BalanceEven,
+    'balance-down-left': BalanceDownLeft,
+    'balance-down-right': BalanceDownRight,
 };
 
 /*
@@ -38,4 +52,4 @@ if (!Banner) {
 }
 ---
 
-<Banner alt={alt} />
+<Banner alt={alt} icons={icons} />

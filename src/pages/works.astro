@@ -7,7 +7,11 @@ const allProjects = await getCollection("projects");
 const pageTitle = "Offerings";
 ---
 <Layout pageTitle={pageTitle}>
-    <Banner />
+    <Banner
+        name="balance-down-left"
+        alt="A balance scale tipping toward the left"
+        icons={{ left: 'windows', right: 'linux' }}
+    />
     <h1>Infrastructure products, not black boxes</h1>
     <ul role="list" class="link-card-grid">
         {allProjects.map((card) => <Card 

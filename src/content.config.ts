@@ -16,7 +16,14 @@ const projectsCollection = defineCollection({
     // travel together.
     banner: z.object({
       name: z.string(),
-      alt: z.string().optional()
+      alt: z.string().optional(),
+      // The icons for a banner that has pans to fill. They are named
+      // rather than given as paths, so the front matter does not have
+      // to know where the artwork is kept.
+      icons: z.object({
+        left: z.string().optional(),
+        right: z.string().optional()
+      }).optional()
     }).optional(),
     worksImage1: z.object({
       url: z.string(),
@@ -53,7 +60,14 @@ const postsCollection = defineCollection({
     // travel together.
     banner: z.object({
       name: z.string(),
-      alt: z.string().optional()
+      alt: z.string().optional(),
+      // The icons for a banner that has pans to fill. They are named
+      // rather than given as paths, so the front matter does not have
+      // to know where the artwork is kept.
+      icons: z.object({
+        left: z.string().optional(),
+        right: z.string().optional()
+      }).optional()
     }).optional(),
     // The post sets faces in its own styles and needs them loaded.
     candidates: z.boolean().optional(),
