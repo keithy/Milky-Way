@@ -10,7 +10,7 @@
  * Adding a piece of artwork means adding a component and one line to
  * the registry below.
  */
-import Warrior from './banners/Warrior.astro';
+import Gauntlets from './banners/Gauntlets.astro';
 import BalanceEven from './banners/BalanceEven.astro';
 import BalanceDownLeft from './banners/BalanceDownLeft.astro';
 import BalanceDownRight from './banners/BalanceDownRight.astro';
@@ -28,10 +28,10 @@ interface Props {
     };
 }
 
-const { name = 'warrior', alt = '', icons = {} } = Astro.props;
+const { name = 'gauntlets', alt = '', icons = {} } = Astro.props;
 
 const banners = {
-    warrior: Warrior,
+    gauntlets: Gauntlets,
     'balance-even': BalanceEven,
     'balance-down-left': BalanceDownLeft,
     'balance-down-right': BalanceDownRight,
