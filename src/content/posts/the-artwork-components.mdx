@@ -1,0 +1,145 @@
+---
+title: 'The artwork components'
+author: Angelic Infrastructure
+date: '11-09-2026'
+draft: true
+image:
+    url: '/images/blog-post.webp'
+    alt: 'The artwork components'
+banner:
+    name: balance-even
+    alt: A balance scale hanging level
+    icons:
+        left: windows
+        right: linux
+---
+
+import Banner from '../../components/Banner.astro';
+import Cloud from '../../components/banners/Cloud.astro';
+import BalanceScale from '../../components/banners/BalanceScale.astro';
+import BalanceEven from '../../components/banners/BalanceEven.astro';
+import BalanceDownLeft from '../../components/banners/BalanceDownLeft.astro';
+import BalanceDownRight from '../../components/banners/BalanceDownRight.astro';
+import Warrior from '../../components/banners/Warrior.astro';
+import Mascot from '../../components/Mascot.astro';
+import HaloLink from '../../components/HaloLink.astro';
+import Card from '../../components/Card.astro';
+import CardPost from '../../components/CardPost.astro';
+
+Every piece of artwork on the site is a component of its own. They are
+listed here so they can be looked at, side by side, against the same
+ground and in the same light.
+
+## The banners
+
+A banner is the artwork at the top of a page. The site has two kinds:
+the warrior, who came first, and the balance, which came later and
+brought the pans with it.
+
+### The warrior
+
+<Warrior alt="The Angelic Warrior, seated at a desk with a laptop" />
+
+The warrior sits on a cloud that drifts. The cloud is drawn rather than
+painted — a set of overlapping radial gradients — so it cannot show the
+fringe that a cut-out leaves at its edges, and it takes its colour from
+the theme rather than from the drawing.
+
+### The balance, hanging level
+
+<BalanceEven
+    alt="A balance scale hanging level, with a Windows mark in one pan and a Linux mark in the other"
+    icons={{ left: 'windows', right: 'linux' }}
+/>
+
+A balance with both pans at the same height. Neither pan is higher than
+the other, so neither of the marks glows.
+
+### The balance, tipping toward the left
+
+<BalanceDownLeft
+    alt="A balance scale tipping toward the left, with the Windows mark in the low pan and the Linux mark in the high pan"
+    icons={{ left: 'windows', right: 'linux' }}
+/>
+
+The left pan is the low one and the right pan is the high one, so the
+Linux mark on the right glows. The glow is the point: the rising side
+is the side worth looking at.
+
+### The balance, tipping toward the right
+
+<BalanceDownRight
+    alt="A balance scale tipping toward the right, with the Linux mark in the low pan and the Windows mark in the high pan"
+    icons={{ left: 'windows', right: 'linux' }}
+/>
+
+The same artwork turned on its side. The scale is drawn once and
+mirrored, because a mirror is cheaper than a second picture and the
+drawing is near enough symmetrical that it does not show.
+
+### The marks
+
+The marks are named rather than given by path, so a post can say what
+it wants in the scales without knowing where the artwork is kept.
+
+<BalanceScale tilt="down-left" icons={{ left: 'windows' }} alt="A balance scale with a Windows mark in the low pan and the high pan empty" />
+
+An icon on one side only, and the high pan left empty. The pans take
+the marks by name, and either side may be left out.
+
+### The cloud on its own
+
+<Cloud center={270} baseline={220} width={240} height={0.42} />
+
+The cloud is a shared component. It is an ovoid, wider than it is
+tall, because it stands in for the plinth of whatever sits on it.
+
+## The mascot
+
+<Mascot alt="The Angelic Warrior, in flight" />
+
+The mascot is a separate piece of artwork from the warrior in the
+banner. He is flying, and the artwork came with its own transparency,
+so unlike the seated warrior he needs no keying and no cloud behind him.
+
+## The halo
+
+<HaloLink href="/works/" label="Offerings" />
+
+A menu item whose first character carries a golden halo. The halo is a
+ring set at an angle above the letter, as though the character were
+catching the light. It fades in on hover and on focus.
+
+## The cards
+
+The cards are the site's other piece of artwork — the tiles on the posts
+and works pages.
+
+<Card
+    url="/works/"
+    image="/images/image-1.webp"
+    title="A card"
+    body="The card the works page uses, with its image, its title and its body."
+/>
+
+<CardPost
+    url="/posts/gaps-are-where-the-work-is/"
+    image="/images/blog-post.webp"
+    title="A post card"
+    date="11-09-2026"
+/>
+
+## The registry
+
+A banner is chosen by name, and a name that is not in the registry fails
+the build rather than quietly falling back to the default. The same is
+true of the marks in the pans.
+
+<Banner
+    name="balance-down-right"
+    alt="A balance scale tipping toward the right"
+    icons={{ left: 'windows', right: 'linux' }}
+/>
+
+That is the registry entry at work: the same component the works page
+uses, named from the front matter of a post.

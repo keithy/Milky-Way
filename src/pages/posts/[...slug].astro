@@ -16,7 +16,7 @@ const { Content, headings } = await render(entry);
 ---
 
 <MarkdownPostsLayout frontmatter={entry.data}>
-    <div class:list={{ "dev-only": entry.data.draft, prose: true }}>
+    <div class="prose">
         <Content />
     </div>
 </MarkdownPostsLayout>
