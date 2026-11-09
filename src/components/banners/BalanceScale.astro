@@ -16,7 +16,6 @@
  * that a post names the banner it wants and the tilt is not a
  * parameter that can be set to a value nobody thought of.
  */
-import Cloud from './Cloud.astro';
 import { iconFor } from './icons';
 
 interface Props {
@@ -98,7 +97,16 @@ const highSide = tilt === 'even' ? undefined : tilt === 'down-left' ? 'right' : 
 ---
 
 <div class="banner">
-    <Cloud center={270} baseline={220} width={200} height={0.42} />
+    <svg class="banner__cloud" viewBox="0 0 540 220" width="540" height="220" preserveAspectRatio="none" aria-hidden="true">
+<defs>
+<radialGradient id="bl0"><stop offset="0%" stop-color="var(--cloud-core)" stop-opacity="1"/><stop offset="45%" stop-color="var(--cloud-core)" stop-opacity="0.75"/><stop offset="100%" stop-color="var(--cloud-core)" stop-opacity="0"/></radialGradient>
+<radialGradient id="bl1"><stop offset="0%" stop-color="var(--cloud-core)" stop-opacity="1"/><stop offset="45%" stop-color="var(--cloud-core)" stop-opacity="0.75"/><stop offset="100%" stop-color="var(--cloud-core)" stop-opacity="0"/></radialGradient>
+<radialGradient id="bl2"><stop offset="0%" stop-color="var(--cloud-core)" stop-opacity="1"/><stop offset="45%" stop-color="var(--cloud-core)" stop-opacity="0.75"/><stop offset="100%" stop-color="var(--cloud-core)" stop-opacity="0"/></radialGradient>
+</defs>
+<ellipse cx="270" cy="178" rx="100" ry="42" fill="url(#bl0)" opacity="0.9"/>
+<ellipse cx="238" cy="183" rx="72" ry="37" fill="url(#bl1)" opacity="0.75"/>
+<ellipse cx="306" cy="185" rx="64" ry="34" fill="url(#bl2)" opacity="0.7"/>
+</svg>
     <img
         class:list={["banner__scale", mirrored && "banner__scale--mirrored"]}
         src={scaleSrc}
@@ -150,9 +158,47 @@ const highSide = tilt === 'even' ? undefined : tilt === 'down-left' ? 'right' : 
      * of it. The depths say which is which.
      */
     .banner__scale,
-    .banner__icon {
+    .banner__icon,
+    .banner__cloud {
         position: absolute;
         display: block;
+    }
+
+    /*
+     * The cloud.
+     *
+     * One soft-edged ovoid, wider than it is tall, lying under the
+     * scale's footing. It is the shape of the plinth it carries, seen
+     * slightly from above, so it reads as the same perspective rather
+     * than as a puff of vapour.
+     *
+     * It is three overlapping ellipses rather than one, because a
+     * single ellipse with a radial gradient has a hard centre and a soft
+     * edge, and the three together give a shape with a soft edge and a
+     * soft middle.
+     *
+     * The cloud does not move. A cloud that drifts is a cloud the reader
+     * watches rather than reads, and a banner is furniture: it should
+     * be there and be still.
+     */
+    .banner__cloud {
+        z-index: 0;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+
+        /*
+         * The cloud's colour comes from the theme rather than from the
+         * drawing, so the same shape serves both grounds. It is darker
+         * than white on both: on the dark ground a white cloud is a
+         * hole in the sky, and on the light ground it disappears into
+         * the page.
+         */
+        --cloud-core: #a8bccd;
+    }
+
+    :global(.light) .banner__cloud {
+        --cloud-core: #93aac0;
     }
 
     /*

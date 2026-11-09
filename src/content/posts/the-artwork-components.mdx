@@ -15,13 +15,13 @@ banner:
 ---
 
 import Banner from '../../components/Banner.astro';
-import Cloud from '../../components/banners/Cloud.astro';
 import BalanceScale from '../../components/banners/BalanceScale.astro';
 import BalanceEven from '../../components/banners/BalanceEven.astro';
 import BalanceDownLeft from '../../components/banners/BalanceDownLeft.astro';
 import BalanceDownRight from '../../components/banners/BalanceDownRight.astro';
 import Gauntlets from '../../components/banners/Gauntlets.astro';
 import Mascot from '../../components/Mascot.astro';
+import Standing from '../../components/banners/Standing.astro';
 import HaloLink from '../../components/HaloLink.astro';
 import Card from '../../components/Card.astro';
 import CardPost from '../../components/CardPost.astro';
@@ -87,12 +87,12 @@ it wants in the scales without knowing where the artwork is kept.
 An icon on one side only, and the high pan left empty. The pans take
 the marks by name, and either side may be left out.
 
-### The cloud on its own
+### The cloud
 
-<Cloud center={270} baseline={220} width={240} height={0.42} />
-
-The cloud is a shared component. It is an ovoid, wider than it is
-tall, because it stands in for the plinth of whatever sits on it.
+The cloud under the scale is part of the scale's own component, not a
+piece of its own. It is an ovoid, wider than it is tall, because it
+stands in for the plinth of whatever sits on it, and it does not move.
+A cloud that drifts is a cloud the reader watches rather than reads.
 
 ## The mascot
 
@@ -101,6 +101,15 @@ tall, because it stands in for the plinth of whatever sits on it.
 The mascot is a separate piece of artwork from the gauntlets in the
 banner. He is flying, and the artwork came with its own transparency,
 so unlike the seated gauntlets he needs no keying and no cloud behind him.
+
+## The standing banner
+
+<Standing alt="A figure with his arms folded, smiling, standing on a cloud" />
+
+He stands with his arms folded, and he is narrower and taller than the
+flying warrior — a standing figure rather than one spread out in the
+air. Because he is tall, the banner gives him its height, and he stands
+on the page rather than on a cloud.
 
 ## The halo
 
