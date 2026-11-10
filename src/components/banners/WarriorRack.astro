@@ -1,0 +1,65 @@
+---
+/*
+ * The warrior and rack banner.
+ *
+ * A figure standing beside a rack of servers.
+ *
+ * The artwork came as a PNG with a transparent background, so it needed
+ * no keying. What it did need was the same bright-rim treatment the
+ * other artwork has: the edge where the matte was is lighter than the
+ * ink, and a light edge glows on the dark ground. The rim is pulled
+ * back to the colour of the ink so that the figure and the rack keep
+ * their edges without wearing a halo.
+ *
+ * The figure and the rack are taller than they are wide, so where the
+ * other artworks fill the width of the banner, this one fills its
+ * height.
+ */
+interface Props {
+    alt?: string;
+}
+
+const { alt = "" } = Astro.props;
+---
+
+<div class="banner">
+    <img class="banner__warrior-rack" src="/images/banners/banner-warrior-rack.webp" alt={alt} />
+</div>
+
+<style>
+    /*
+     * The banner is a fixed space on the page: five hundred and forty by
+     * three hundred. The figure and the rack fill it.
+     */
+    .banner {
+        position: relative;
+        width: 540px;
+        max-width: 100%;
+        aspect-ratio: 540 / 300;
+        margin: 20px auto 1rem;
+        line-height: 0;
+        overflow: hidden;
+    }
+
+    /*
+     * The figure and the rack.
+     *
+     * The pair is taller than it is wide, so the image is scaled until
+     * they are as tall as the banner, and centred in it. That makes
+     * them two hundred and forty-five pixels wide, leaving room either
+     * side.
+     *
+     * The width and the height are the drawing's own proportions, so
+     * neither the figure nor the rack is squashed.
+     */
+    .banner__warrior-rack {
+        position: absolute;
+        z-index: 0;
+        display: block;
+        width: 45.37%;
+        height: 100%;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+    }
+</style>

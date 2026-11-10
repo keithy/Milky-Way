@@ -1,0 +1,126 @@
+---
+/*
+ * The rack banner.
+ *
+ * A whole rack of servers, standing on a cloud.
+ *
+ * The artwork is a photograph rather than a drawing, and it came with
+ * its own transparency: the rack was cut out of its background, so
+ * there is nothing to key and no fringe to pull back. The rack is dark
+ * and the cloud is light, so the two need very little between them.
+ *
+ * The rack is taller than it is wide, so where the other artworks fill
+ * the width of the banner, this one fills its height and leaves the
+ * rest of the banner to the cloud.
+ */
+interface Props {
+    alt?: string;
+}
+
+const { alt = "" } = Astro.props;
+---
+
+<div class="banner">
+    <svg class="banner__cloud" viewBox="0 0 540 300" width="540" height="300" preserveAspectRatio="none" aria-hidden="true">
+<defs>
+<radialGradient id="rc0"><stop offset="0%" stop-color="var(--cloud-core)" stop-opacity="1"/><stop offset="45%" stop-color="var(--cloud-core)" stop-opacity="0.75"/><stop offset="100%" stop-color="var(--cloud-core)" stop-opacity="0"/></radialGradient>
+<radialGradient id="rc1"><stop offset="0%" stop-color="var(--cloud-core)" stop-opacity="1"/><stop offset="45%" stop-color="var(--cloud-core)" stop-opacity="0.75"/><stop offset="100%" stop-color="var(--cloud-core)" stop-opacity="0"/></radialGradient>
+<radialGradient id="rc2"><stop offset="0%" stop-color="var(--cloud-core)" stop-opacity="1"/><stop offset="45%" stop-color="var(--cloud-core)" stop-opacity="0.75"/><stop offset="100%" stop-color="var(--cloud-core)" stop-opacity="0"/></radialGradient>
+<radialGradient id="rc3"><stop offset="0%" stop-color="var(--cloud-core)" stop-opacity="1"/><stop offset="45%" stop-color="var(--cloud-core)" stop-opacity="0.75"/><stop offset="100%" stop-color="var(--cloud-core)" stop-opacity="0"/></radialGradient>
+<radialGradient id="rc4"><stop offset="0%" stop-color="var(--cloud-core)" stop-opacity="1"/><stop offset="45%" stop-color="var(--cloud-core)" stop-opacity="0.75"/><stop offset="100%" stop-color="var(--cloud-core)" stop-opacity="0"/></radialGradient>
+<radialGradient id="rc5"><stop offset="0%" stop-color="var(--cloud-core)" stop-opacity="1"/><stop offset="45%" stop-color="var(--cloud-core)" stop-opacity="0.75"/><stop offset="100%" stop-color="var(--cloud-core)" stop-opacity="0"/></radialGradient>
+<radialGradient id="rc6"><stop offset="0%" stop-color="var(--cloud-core)" stop-opacity="1"/><stop offset="45%" stop-color="var(--cloud-core)" stop-opacity="0.75"/><stop offset="100%" stop-color="var(--cloud-core)" stop-opacity="0"/></radialGradient>
+</defs>
+<ellipse cx="270" cy="252" rx="92" ry="40" fill="url(#rc0)" opacity="1"/>
+<ellipse cx="218" cy="258" rx="62" ry="34" fill="url(#rc1)" opacity="0.85"/>
+<ellipse cx="322" cy="258" rx="62" ry="34" fill="url(#rc2)" opacity="0.85"/>
+<ellipse cx="130" cy="272" rx="96" ry="30" fill="url(#rc3)" opacity="0.6"/>
+<ellipse cx="410" cy="272" rx="96" ry="30" fill="url(#rc4)" opacity="0.6"/>
+<ellipse cx="58" cy="280" rx="58" ry="22" fill="url(#rc5)" opacity="0.38"/>
+<ellipse cx="482" cy="280" rx="58" ry="22" fill="url(#rc6)" opacity="0.38"/>
+</svg>
+    <img class="banner__rack" src="/images/banners/banner-rack.webp" alt={alt} />
+</div>
+
+<style>
+    /*
+     * The banner is a fixed space on the page: five hundred and forty by
+     * three hundred. The cloud fills it, and the rack stands on it.
+     */
+    .banner {
+        position: relative;
+        width: 540px;
+        max-width: 100%;
+        aspect-ratio: 540 / 300;
+        margin: 20px auto 1rem;
+        line-height: 0;
+        overflow: hidden;
+    }
+
+    /*
+     * The layers are stacked rather than laid out in a row, and each
+     * carries an explicit z-index. That matters: an absolutely
+     * positioned element with z-index auto paints above in-flow
+     * content, so leaving the rack static would put the cloud on top
+     * of it. The depths say which is which.
+     */
+    .banner__rack,
+    .banner__cloud {
+        position: absolute;
+        display: block;
+    }
+
+    .banner__cloud {
+        z-index: 0;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+
+        /*
+         * The cloud's colour comes from the theme rather than from the
+         * drawing, so the same shape serves both grounds. It is darker
+         * than white on both: on the dark ground a white cloud is a
+         * hole in the sky, and on the light ground it disappears into
+         * the page.
+         */
+        --cloud-core: #a8bccd;
+    }
+
+    :global(.light) .banner__cloud {
+        --cloud-core: #93aac0;
+    }
+
+    /*
+     * The rack.
+     *
+     * The rack is taller than it is wide, so the image is scaled until
+     * the rack is as tall as the banner, and centred in it. That makes
+     * it about a hundred and thirty-five pixels wide, so the rest of
+     * the banner is cloud.
+     *
+     * The width and the height are the drawing's own proportions, so the
+     * rack is not squashed. The rack is a third of a unit wide for
+     * every one it is high, so at three hundred tall it is a hundred
+     * and thirty-five wide — a quarter of the banner.
+     */
+    .banner__rack {
+        z-index: 1;
+        width: 25%;
+        height: 100%;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+
+        /*
+         * The rack does not stand on the cloud so much as rise out of
+         * it. The bottom of the rack is faded away, so that the metal
+         * dissolves into the cloud rather than being cut off by it.
+         *
+         * The mask is on the rack rather than on the cloud, so the
+         * cloud keeps its full strength and only the foot of the rack
+         * is faded.
+         */
+        -webkit-mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
+        mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
+    }
+</style>

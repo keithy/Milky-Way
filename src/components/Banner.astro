@@ -12,6 +12,9 @@
  */
 import Gauntlets from './banners/Gauntlets.astro';
 import Standing from './banners/Standing.astro';
+import Rack from './banners/Rack.astro';
+import Warrior from './banners/Warrior.astro';
+import WarriorRack from './banners/WarriorRack.astro';
 import BalanceEven from './banners/BalanceEven.astro';
 import BalanceDownLeft from './banners/BalanceDownLeft.astro';
 import BalanceDownRight from './banners/BalanceDownRight.astro';
@@ -34,6 +37,9 @@ const { name = 'gauntlets', alt = '', icons = {} } = Astro.props;
 const banners = {
     gauntlets: Gauntlets,
     standing: Standing,
+    rack: Rack,
+    warrior: Warrior,
+    'warrior-rack': WarriorRack,
     'balance-even': BalanceEven,
     'balance-down-left': BalanceDownLeft,
     'balance-down-right': BalanceDownRight,

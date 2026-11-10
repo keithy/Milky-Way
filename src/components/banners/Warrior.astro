@@ -1,0 +1,67 @@
+---
+/*
+ * The warrior banner.
+ *
+ * A figure standing with his arms out.
+ *
+ * The artwork came as a premultiplied PNG: the colour was stored
+ * multiplied by its own alpha, so the white backdrop had been reduced to
+ * a black haze over the whole frame. Undoing that, and keying the
+ * backdrop away, left a bright rim where the matte had been — and a
+ * bright rim glows on the dark ground, the way a rim light does around
+ * a shape that is meant to be in shadow. The rim is pulled back to the
+ * colour of the ink so that the figure keeps its edges without wearing
+ * a halo.
+ *
+ * The figure stands on the page rather than on a cloud. He is taller
+ * than he is wide, so where the other artworks fill the width of the
+ * banner, this one fills its height.
+ */
+interface Props {
+    alt?: string;
+}
+
+const { alt = "" } = Astro.props;
+---
+
+<div class="banner">
+    <img class="banner__warrior" src="/images/banners/banner-warrior.webp" alt={alt} />
+</div>
+
+<style>
+    /*
+     * The banner is a fixed space on the page: five hundred and forty by
+     * three hundred. The figure fills it.
+     */
+    .banner {
+        position: relative;
+        width: 540px;
+        max-width: 100%;
+        aspect-ratio: 540 / 300;
+        margin: 20px auto 1rem;
+        line-height: 0;
+        overflow: hidden;
+    }
+
+    /*
+     * The figure.
+     *
+     * The figure is taller than it is wide, so the image is scaled until
+     * the figure is as tall as the banner, and centred in it. That makes
+     * it about a hundred and ninety pixels wide, so the rest of the
+     * banner is left empty.
+     *
+     * The width and the height are the drawing's own proportions, so the
+     * figure is not squashed.
+     */
+    .banner__warrior {
+        position: absolute;
+        z-index: 0;
+        display: block;
+        width: 35.37%;
+        height: 100%;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+    }
+</style>
