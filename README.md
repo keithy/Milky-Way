@@ -1,18 +1,11 @@
-# Angelic-way — the site as a template
+# Angelic Infrastructure — the public website
 
 > **We build the tools for you to use the best proven technologies.**
 >
 > If you want rapid iteration, want to repatriate your data, or hate
 > yaml — we can help.
 
-This is the Angelic Infrastructure site, kept as a template for
-experimentation. It is the same site that is deployed at
-[angelic.gets-it.net](https://angelic.gets-it.net), with the same
-structure and the same artwork, and with less of the content filled in.
-
-The deployed site is built from the `website-angelic` repository, which
-is private. This copy lives in the gallery, beside the Astro starters it
-was made from.
+The site is at [angelic.gets-it.net](https://angelic.gets-it.net).
 
 ## The categories
 
