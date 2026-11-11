@@ -1,73 +1,56 @@
-# 🌌 Milky-Way
-Milky Way brings forth a minimalist design ethos, allowing your work to shine like stars in the night sky. With clean lines and intuitive navigation, visitors are guided effortlessly through your portfolio, focusing solely on your creations.
+# Angelic Infrastructure — the public website
 
-Embrace the whimsical charm of Milky Way as it showcases your talents in a manner that's both elegant and endearing. Whether you're a designer, developer, artist, or creative professional of any kind, Milky Way provides the perfect canvas to showcase your endeavors.
+> **We build the tools for you to use the best proven technologies.**
+>
+> If you want rapid iteration, want to repatriate your data, or hate
+> yaml — we can help.
 
-With its responsive design, Milky Way ensures a seamless experience across devices, from desktops to smartphones, so your portfolio is accessible to all who wish to explore it. Let your work take center stage against the backdrop of this celestial template.
+The site is at [angelic.gets-it.net](https://angelic.gets-it.net).
 
-<p align="center">
-  <img align="center" alt="Astro" src="https://portal.astro.build/_image?href=https%3A%2F%2Fstorage.googleapis.com%2Fdev-portal-bucket%2Fli8pypvydk9xnzzrtrgzfw9q11j836g6y9efm8.webp&w=1600&h=900&f=webp"/>
-</p>
+## The categories
 
-[![Built with Astro](https://astro.badg.es/v2/built-with-astro/tiny.svg)](https://astro.build) [![Netlify Status](https://api.netlify.com/api/v1/badges/0b0bcb79-a1d8-4b32-9566-8f30af19e4cc/deploy-status)](https://app.netlify.com/sites/astro-milky-way/deploys)
+| Route | What it holds |
+|---|---|
+| `/missions/` | The sub-missions — AngelBox, PHP Rescue Services, Cloud Repatriation |
+| `/weapons/` | The tools we build |
+| `/judgements/` | The articles — the reasoning behind a decision |
+| `/warriors/` | The teams, projects and people behind the cause |
+| `/strategies/` | The metatools — the ones we work with |
+| `/writings/` | The longer pieces |
 
-## 🔥 Features
-- [x] Simple and clean design, perfect for showcasing your work.
-- [x] Responsive layout for seamless viewing across different devices.
-- [x] Fast and efficient, thanks to the Astro static site generator.
-- [x] Easy to customize with CSS and straightforward HTML structure.
+## The artwork
 
-## ⚓ Lighthouse Score
-<p align="center">
-  <img width="600" alt="Lighthouse Score" src="https://raw.githubusercontent.com/ttomczak3/Milky-Way/6e386e2f920c993c33d348a9c1271a1cec6c6d2b/milkyway-lighthouse-score.svg"/>
-</p>
+Every piece of artwork on the site is a component of its own, with its
+own treatment — its own layering, its own fade, its own tint for the
+theme. The banners live in `src/components/banners/`, and each is
+registered by name in `src/components/Banner.astro`, so a post can say
+which artwork it wants without knowing where the artwork is kept.
 
-## 🚀 Getting Started
-Clone this repository to your local machine using Git.
+The artwork came from a shared pipeline where its provenance is
+recorded. Some of it is ours; some of it belongs to others and is used
+with their permission. See `NOTICE`.
 
-```scheme
-git clone https://github.com/ttomczak3/Milky-Way.git
-cd Milky-Way
+## Building
+
+```bash
+./build.sh
 ```
 
-| Command           | Action                                       |
-| :---------------- | :------------------------------------------- |
-| `npm install`     | Installs dependencies                        |
-| `npm run dev`     | Starts local dev server at `localhost:4321`  |
-| `npm run build`   | Build your production site to `./dist/`      |
-| `npm run preview` | Preview your build locally, before deploying |
+The build stages the output and moves it into place. Astro empties its
+output directory before building, and that directory is the root
+mutagen watches — an emptying root halts the sync, and the box goes on
+serving the previous build.
 
-Edit the HTML files in the `src/pages` directory to add your projects, experiences, and personal information. You can also modify the CSS styles in `src/styles` to match your preferences.
+The node and pnpm versions come from the box's mise config, so the
+toolchain does not depend on what is installed globally. A fresh clone
+needs `mise trust` on that config before mise will run it.
 
-## 📂 Project Structure
+## Licence
 
-```
-/
-├── public/
-│   └── GitHub.webp
-│   └── blog-post.webp
-│   └── blog.webp
-│   └── favicon.svg
-│   └── laptop.webp
-│   └── space.webp
-│   └── youtube.webp
-├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   ├── pages/
-│   ├── styles/
-│   └── env.d.ts
-└── package.json
-```
+This is a derivative of the [Milky-Way](https://github.com/ttomczak3/Milky-Way)
+template by Tristen Tomczak, which is MIT licensed and remains so. The
+template's code is used here under that licence.
 
-## 💻 Contributing
-Contributions to this project are welcome. If you find a bug or have a suggestion for improvement, please open an issue or submit a pull request.
-
-## 📃 License
-This project is licensed under the MIT License. See the `LICENSE` file for details.
-
-## ☕ Support
-If you enjoy Milky-Way and would like to show your support and appreciation through a tip, I would gratefully accept it.
-
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/X8X0P7FGR)
+Everything added on top of it — the structure, the artwork, the writing
+and the components — is the property of Angelic Infrastructure and is
+all rights reserved. `NOTICE` sets out the boundary, file by file.

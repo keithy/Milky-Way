@@ -1,0 +1,91 @@
+Angelic Infrastructure — the public website
+===========================================
+
+This site is built on the Milky-Way template by Tristen Tomczak
+(https://github.com/ttomczak3/Milky-Way), which is MIT licensed. The
+template's code is used here under that licence, and the MIT notice is
+reproduced in the LICENSE file beside this one.
+
+Everything else — the site's structure, its artwork, its writing and the
+components written for it — belongs to Angelic Infrastructure and is
+all rights reserved.
+
+
+The boundary
+------------
+
+### Under the MIT licence — the template
+
+These are Tristen Tomczak's, unchanged from the upstream template:
+
+    public/images/404.webp
+    public/images/GitHub.webp
+    public/images/blog-post.webp
+    public/images/image-1.webp
+    public/images/image-2.webp
+    public/images/laptop.webp
+    public/images/space.webp
+    public/images/favicon.svg
+    public/images/github-mark.svg
+    public/images/github-mark-white.svg
+    public/images/li-in.png
+    public/images/li-in-white.png
+    public/images/mail.svg
+    public/images/mail-white.svg
+    public/images/youtube.webp
+
+And the template's own source: the base layout, the card and header
+components, the typography and the stylesheet as they arrived.
+
+
+### All rights reserved — Angelic Infrastructure
+
+Everything written for this site:
+
+**The artwork.** The banners, the figures and the emblem:
+
+    public/images/angel-on-mission.webp
+    public/images/warrior-placeholder.webp
+    public/images/banner-gauntlets-front.webp
+    public/images/banners/banner-balance-level.webp
+    public/images/banners/banner-balance-tipped.webp
+    public/images/banners/banner-rack.webp
+    public/images/banners/banner-standing.webp
+    public/images/banners/banner-warrior.webp
+    public/images/banners/banner-warrior-rack.webp
+    public/images/icons/tux.svg
+    public/images/icons/windows.webp
+    public/images/gitlab-mark.svg
+    public/images/gitlab-mark-dark.svg
+    public/images/hh/
+
+**The components.** The banner components, the halo link, the theme
+icon, the navigation, the question component, the card components and
+the site's own layouts, in so far as they were written for this site.
+
+**The writing.** Every article, every mission, every entry under
+judgements, warriors, strategies and writings.
+
+**The structure.** The collections, the routes, the naming and the
+organisation of the site.
+
+**The build.** The build script and the deployment configuration.
+
+
+A note on the artwork
+--------------------
+
+Some of the source artwork is not ours to license. The photographs of
+the Oxide rack are © Oxide Computer, and are used here with their
+permission. The artwork in the shared media pipeline belongs to
+Angelic Infrastructure unless otherwise stated, and the pipeline is
+where its provenance is recorded.
+
+Where a piece of artwork came from somewhere else, that is said in the
+commit that introduced it.
+
+
+Contact
+-------
+
+Angelic Infrastructure — angelic.hosts@consultant.com
