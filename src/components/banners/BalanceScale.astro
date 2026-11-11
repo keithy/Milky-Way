@@ -63,9 +63,16 @@ const mirrored = tilt === 'down-right';
 /*
  * Where the pans are.
  *
- * The numbers are the centre of each pan in the banner's own pixels,
- * and the rim is where the bottom of an icon sits — at the rim of the
- * pan, so the icon rests in the bowl rather than sinking into it.
+ * The numbers are the centre of each pan, as a percentage of the
+ * banner's own width and height, and the rim is where the bottom of an
+ * icon sits — at the rim of the pan, so the icon rests in the bowl
+ * rather than sinking into it.
+ *
+ * They are percentages rather than pixels because the banner narrows
+ * with the viewport. The scale and the pans shrink together, and the
+ * icons have to shrink with them: left in pixels, an icon would sit
+ * where its pan used to be, and the further the banner narrowed the
+ * further off it would drift.
  *
  * The measurements come from the artwork. The scale is drawn at two
  * hundred and forty-two by one hundred and ninety, with its foot at one
@@ -74,16 +81,16 @@ const mirrored = tilt === 'down-right';
  */
 const pans = {
     'even': {
-        left: { x: 194, rim: 90 },
-        right: { x: 346, rim: 90 },
+        left: { x: 35.926, rim: 40.909 },
+        right: { x: 64.074, rim: 40.909 },
     },
     'down-left': {
-        left: { x: 192, rim: 61 },
-        right: { x: 348, rim: 113 },
+        left: { x: 35.556, rim: 27.727 },
+        right: { x: 64.444, rim: 51.364 },
     },
     'down-right': {
-        left: { x: 192, rim: 113 },
-        right: { x: 348, rim: 61 },
+        left: { x: 35.556, rim: 51.364 },
+        right: { x: 64.444, rim: 27.727 },
     },
 } as const;
 
@@ -116,7 +123,7 @@ const highSide = tilt === 'even' ? undefined : tilt === 'down-left' ? 'right' : 
         leftIcon && (
             <span
                 class:list={["banner__icon", "banner__icon--left", highSide === 'left' && "banner__icon--glow"]}
-                style={`left:${pan.left.x}px; bottom:${pan.left.rim}px;`}
+                style={`left:${pan.left.x}%; bottom:${pan.left.rim}%;`}
             >
                 <img src={leftIcon.src} alt={leftIcon.alt} />
             </span>
@@ -126,7 +133,7 @@ const highSide = tilt === 'even' ? undefined : tilt === 'down-left' ? 'right' : 
         rightIcon && (
             <span
                 class:list={["banner__icon", "banner__icon--right", highSide === 'right' && "banner__icon--glow"]}
-                style={`left:${pan.right.x}px; bottom:${pan.right.rim}px;`}
+                style={`left:${pan.right.x}%; bottom:${pan.right.rim}%;`}
             >
                 <img src={rightIcon.src} alt={rightIcon.alt} />
             </span>
@@ -212,8 +219,8 @@ const highSide = tilt === 'even' ? undefined : tilt === 'down-left' ? 'right' : 
      */
     .banner__scale {
         z-index: 1;
-        width: 242px;
-        height: 190px;
+        width: 44.815%;
+        height: 86.364%;
         left: 50%;
         top: 0;
         transform: translateX(-50%);
@@ -241,12 +248,13 @@ const highSide = tilt === 'even' ? undefined : tilt === 'down-left' ? 'right' : 
      */
     .banner__icon {
         z-index: 2;
+        width: 8.519%;
         transform: translateX(-50%);
     }
 
     .banner__icon img {
         display: block;
-        width: 46px;
+        width: 100%;
         height: auto;
     }
 
