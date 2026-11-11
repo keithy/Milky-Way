@@ -449,7 +449,7 @@ html.unzoomed .navbar {
  */
 .toolbar {
   position: absolute;
-  top: 0.8rem;
+  top: 3.2rem;
   right: var(--chrome-inset);
   z-index: 10;
   display: flex;
