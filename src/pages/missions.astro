@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import Question from '../components/Question.astro';
 import AngelOnMission from '../components/AngelOnMission.astro';
 const allMissions = await getCollection("missions");
 const pageTitle = "Angelic Assignments";
@@ -9,6 +10,21 @@ const pageTitle = "Angelic Assignments";
 <Layout pageTitle={pageTitle}>
     <AngelOnMission alt="The Angelic Warrior, in flight" />
     <h1>Angelic Assignments</h1>
+
+    <div class="prose">
+
+    <p>
+        A senior platform IC at FTE cost, against a fractional one for a
+        six-month outcome.
+    </p>
+
+    <p>
+        The customer's question is not "is your technology good". It is
+        "what does it cost me not to hire".
+    </p>
+
+    </div>
+
     <ul role="list" class="link-card-grid">
         {allMissions.map((card) => <Card
             url={`/missions/${card.id}/`}
@@ -18,4 +34,78 @@ const pageTitle = "Angelic Assignments";
             draft={card.data.draft}
         />)}
     </ul>
+
+    <h2>The assignments</h2>
+
+    <div class="prose">
+
+    <p>
+        Architecture review and stack migration. Custom toolkits for the
+        systems you integrate, and automation for the lines between the
+        boxes. Training and knowledge share for like-minded
+        infrastructure engineers.
+    </p>
+
+    </div>
+
+    <Question
+        number={1}
+        question="Which services are actually offered?"
+        hint="The current copy lists architecture review and stack migration, custom toolkits and automation, and training. Are these three services, or one engagement delivered three ways? The page is stronger if a reader can tell from the page alone what to ask for."
+    />
+
+    <Question
+        number={2}
+        question="How does an assignment run?"
+        hint="The shape of the work. Fixed window, specific outcome, fractional — but what happens in week one, and what does the team have at the end? Is the engagement hands-on throughout, or is there a handover? The outcome the customer pays for is declarative infrastructure with a sub-30-second feedback loop, plus brownfield migration that makes existing systems inspectable."
+    />
+
+    <Question
+        number={3}
+        question="What does it cost?"
+        hint="The hardest question on the page and the one the persona says the customer is actually asking. Day rate, fixed fee, or a price per outcome? A fraction of an FTE is the framing that works, but is there a number underneath it?"
+    />
+
+    <Question
+        number={4}
+        question="What does the customer have to bring?"
+        hint="Access to the systems, a senior engineer on their side who can make decisions, a willingness to change things. Being honest about what an assignment needs from the client is a credibility move, not a weakness."
+    />
+
+    <Question
+        number={5}
+        question="What does 'fractional' mean in practice?"
+        hint="Two days a week for six months, or two weeks before leaving? And what is the alternative the customer is weighing — a hire, a consultancy, or doing nothing? The comparison that wins the assignment is usually 'not hiring', not 'not hiring a consultancy'."
+    />
+
+    <Question
+        number={6}
+        question="Why not just hire?"
+        hint="The counter-argument, stated better than they would state it. A hire is a year of commitment bought in the hope of a year of output. An assignment is a specific outcome, bought for exactly as long as it takes to reach it. Is that the answer, or is it something else?"
+    />
+
+    <Question
+        number={7}
+        question="Who is a good fit, and who is not?"
+        hint="Naming who should not hire is unusual and credible. Teams with no existing platform capability, teams who want a build-and-handover team, teams who need the same person for five years — say plainly which assignments you will turn down."
+    />
+
+    <Question
+        number={8}
+        question="What happens after?"
+        hint="The retainer, the handover, the training that leaves the team able to run it themselves. If there is a shape after the assignment — a fractional arrangement, a support contract, nothing — say what it is."
+    />
+
+    <Question
+        number={9}
+        question="Where do Infrastructure Angels fit?"
+        hint="Training and knowledge share for like-minded infrastructure engineers is in the current copy but not on the site yet. Is that a service you sell, a community you run, or a way of describing the customers themselves?"
+    />
+
+    <Question
+        number={10}
+        question="The one call to action."
+        hint="One URL, and it should be the email. The worked example uses angelic.hosts@consultant.com. Confirm it, and confirm there is no second route on the page."
+    />
+
 </Layout>

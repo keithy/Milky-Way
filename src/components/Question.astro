@@ -1,0 +1,72 @@
+---
+/*
+ * A question to answer.
+ *
+ * The pages on this site are being written with the author rather than
+ * for the author. Each one carries the questions that have to be
+ * answered before it is finished, and this is what a question looks
+ * like on the page.
+ *
+ * The question is a heading, so it can be linked to and found, and the
+ * answer goes underneath it. When a question has been answered the
+ * section can be given the `answered` class and it reads as prose
+ * rather than as a question.
+ */
+interface Props {
+    number?: number;
+    question: string;
+    // A note on what the answer should cover.
+    hint?: string;
+}
+
+const { number, question, hint } = Astro.props;
+---
+
+<section class="question">
+    <h2 class="question__heading">
+        {number && <span class="question__number">{number}</span>}
+        {question}
+    </h2>
+    {hint && <p class="question__hint">{hint}</p>}
+    <div class="question__answer">
+        <slot />
+    </div>
+</section>
+
+<style>
+    .question {
+        margin: 2.5rem 0;
+        padding-left: 1.25rem;
+        border-left: 3px solid var(--celestial-gold);
+    }
+
+    .question__heading {
+        margin: 0 0 0.5rem;
+        display: flex;
+        align-items: baseline;
+        gap: 0.6rem;
+    }
+
+    .question__number {
+        font-family: var(--mono);
+        font-size: 0.8rem;
+        color: var(--celestial-gold);
+        flex: none;
+    }
+
+    .question__hint {
+        margin: 0 0 1rem;
+        font-size: 0.95rem;
+        opacity: 0.75;
+        text-align: left;
+    }
+
+    /*
+     * The answer area is empty while the question is unanswered, and
+     * the empty space is a hint that something goes here.
+     */
+    .question__answer:empty::before {
+        content: "—";
+        opacity: 0.4;
+    }
+</style>

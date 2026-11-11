@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+import Question from '../components/Question.astro';
 import Banner from '../components/Banner.astro';
 const allWeapons = await getCollection("weapons");
 const pageTitle = "Angelic Tools & Tooling";
@@ -12,6 +13,17 @@ const pageTitle = "Angelic Tools & Tooling";
         alt="A rack of servers, standing on a cloud"
     />
     <h1>Angelic Tools &amp; Tooling</h1>
+
+    <div class="prose">
+
+    <p>
+        Off-the-shelf software is very good at the things everybody needs.
+        It is the gaps between products that need closing, and that is
+        where the work is.
+    </p>
+
+    </div>
+
     <ul role="list" class="link-card-grid">
         {allWeapons.map((card) => <Card
             url={`/weapons/${card.id}/`}
@@ -21,4 +33,65 @@ const pageTitle = "Angelic Tools & Tooling";
             draft={card.data.draft}
         />)}
     </ul>
+
+    <h2>The tools</h2>
+
+    <div class="prose">
+
+    <p>
+        A server farm is capacity you can depend on. A server appliance is
+        a problem already solved. Bespoke tooling is the integration
+        nobody enjoys.
+    </p>
+
+    </div>
+
+    <Question
+        number={1}
+        question="Is the product list right?"
+        hint="Three appear in the current copy: server farms, server appliances, bespoke tooling. The persona says do not expose internal module names unless the customer would name them — so AngelBox and Formae are deliberately absent for now. Is that the right call for this page, or does Formae earn its place because customers already use it?"
+    />
+
+    <Question
+        number={2}
+        question="What is each one, in one sentence?"
+        hint="A server farm, a server appliance and bespoke tooling each need a sentence that a customer could repeat to their own team. The point of the page is not the list — it is that each product exists to remove a specific kind of pain."
+    />
+
+    <Question
+        number={3}
+        question="Who buys which?"
+        hint="A team with a cloud bill and repatriation arithmetic buys a server farm. A team drowning in one operational problem buys an appliance. A team with a bespoke integration buys tooling. Is that the real split, and are there buyers who are not in it?"
+    />
+
+    <Question
+        number={4}
+        question="What does a product cost, and what does it replace?"
+        hint="The persona sells outcomes, not features. The repatriation argument is that the savings buy two Oxide rack-scale computers. Is there a comparable number for a server farm and for an appliance — what does the product save, and what does it cost?"
+    />
+
+    <Question
+        number={5}
+        question="What makes one of these a product rather than an assignment?"
+        hint="The distinction matters because the assignments page is about services. What does a product include that an assignment does not — a spec, a support commitment, a version, a price list? If the answer is that there is no clean line, say so."
+    />
+
+    <Question
+        number={6}
+        question="What is in the pipeline?"
+        hint="The tools that exist, the ones being built, and the ones deliberately not built. Naming the roadmap invites the wrong buyers; not naming it makes the page feel thin. What is the honest state of each product today?"
+    />
+
+    <Question
+        number={7}
+        question="Where does Formae sit?"
+        hint="Formae is an infrastructure-as-code platform with its own MCP server and skills, and AngelBox is the framework the estate runs on. If a customer already uses Formae, saying so here earns trust. If not, the names are noise. Decide."
+    />
+
+    <Question
+        number={8}
+        question="The call to action."
+        hint="One URL. On a products page it should be the route to buy or to talk about buying — not a link to the documentation, which is where the persona says the builder voice sends people instead."
+    />
+
 </Layout>
