@@ -845,15 +845,21 @@ html.light {
     white-space: normal;
   }
 
-  /* Four labels and the toggle will not fit across the narrowest
-   * screens at the usual size, so the row is set smaller there. */
-  .toolbar {
-    font-size: 0.78rem;
-    letter-spacing: 0.06em;
-  }
-
   .toolbar__menu>a {
     margin: 0 5px;
+  }
+
+  /* The four labels and the switch need more room than the narrowest
+   * screens have to give, so the row wraps rather than running off
+   * the edge. */
+  .toolbar {
+    flex-wrap: wrap;
+    row-gap: 0.4rem;
+  }
+
+  .toolbar__menu {
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .skills__img {
