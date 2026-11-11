@@ -1,9 +1,9 @@
 ---
-title: 'Server farms'
-description: 'Composable, repeatable infrastructure for teams that need dependable capacity across heterogeneous hardware and cloud environments.'
+title: 'AngelBox'
+description: 'Model Generated Reproducible Infrastructure - Zero Drift. Rapid config change turnaround - Updates land in < 1 min.'
 image:
     url: '/images/GitHub.webp'
-    alt: 'Server farm'
+    alt: 'AngelBox'
 banner:
     name: balance-even
     alt: A balance scale hanging level
@@ -18,6 +18,10 @@ stack: NixOS, Talos, Pkl, ZFS
 website: https://angelic.infrastructure/
 github: https://gitlab.com/angelbox
 ---
+
+Develop (virtually) in production - Instant Deployment, rapid feedback
+loop. Instant Backups - Snapshots, as safe as possible. Portable
+Infrastructure and Data - Bring your cloud back on-prem.
 
 The same declarative configuration, producing the same result on bare
 metal, a hypervisor, or a managed instance. Immutable operating systems,
