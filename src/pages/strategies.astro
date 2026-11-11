@@ -1,0 +1,46 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import Banner from "../components/Banner.astro";
+const allStrategies = await getCollection("strategies");
+const pageTitle = "Strategies";
+---
+
+<Layout pageTitle={pageTitle}>
+    <Banner
+        name="rack"
+        alt="A rack of servers, standing on a cloud"
+    />
+    <h1>Strategies</h1>
+    <p class="center">
+        The metatools — the ones we work with, rather than the ones we
+        build for others.
+    </p>
+    <ul role="list" class="link-card-grid">
+        {
+            allStrategies.map((strategy) => (
+                <li class="card">
+                    <a class="card__link" href={`/strategies/${strategy.id}/`}>
+                        <div class="center">
+                            <img
+                                class="card__img"
+                                src={strategy.data.image.url}
+                                role="presentation"
+                                width="226"
+                                height="127"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                        </div>
+                        <h3 class="card__title">
+                            {strategy.data.title}
+                        </h3>
+                        <p class="card__txt">
+                            {strategy.data.summary}
+                        </p>
+                    </a>
+                </li>
+            ))
+        }
+    </ul>
+</Layout>

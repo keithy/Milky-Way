@@ -24,6 +24,8 @@ const detailPagePrefixes = [
     "/weapons/",
     "/judgements/",
     "/warriors/",
+    "/strategies/",
+    "/writings/",
 ];
 
 const isDetailPage = (destination) =>

@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import CardPost from "../components/CardPost.astro";
+import Banner from "../components/Banner.astro";
+const allWritings = await getCollection("writings");
+const pageTitle = "Writings";
+---
+
+<Layout pageTitle={pageTitle}>
+    <Banner
+        name="balance-even"
+        alt="A balance scale hanging level"
+    />
+    <h1>Writings</h1>
+    <p class="center">
+        The longer pieces.
+    </p>
+    <ul role="list" class="link-card-grid">
+        {
+            allWritings.map((writing) => (
+                <CardPost
+                    url={`/writings/${writing.id}/`}
+                    image={writing.data.image.url}
+                    title={writing.data.title}
+                    date={writing.data.date}
+                    draft={writing.data.draft}
+                />
+            ))
+        }
+    </ul>
+</Layout>

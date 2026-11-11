@@ -1,0 +1,22 @@
+---
+import { getCollection, getEntry, render } from "astro:content";
+import MarkdownStrategyLayout from "../../layouts/MarkdownStrategyLayout.astro";
+
+export const prerender = true;
+export async function getStaticPaths() {
+    const strategyEntries = await getCollection("strategies");
+    return strategyEntries.map((entry) => ({
+        params: { slug: entry.id },
+        props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+---
+
+<MarkdownStrategyLayout frontmatter={entry.data}>
+    <div class="prose">
+        <Content />
+    </div>
+</MarkdownStrategyLayout>

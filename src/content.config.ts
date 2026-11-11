@@ -120,9 +120,53 @@ const warriorsCollection = defineCollection({
     })
 });
 
+/*
+ * A strategy: a metatool, and how we work with it.
+ *
+ * These are the tools we work with rather than the tools we build for
+ * others. The weapons are for demanding teams; the strategies are
+ * ours.
+ */
+const strategiesCollection = defineCollection({
+    loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/strategies" }),
+    schema: z.object({
+        title: z.string(),
+        // What the tool is, in a line.
+        summary: z.string(),
+        image: z.object({
+            url: z.string(),
+            alt: z.string()
+        }),
+        banner: bannerSchema.optional(),
+        // The repository it lives in.
+        repository: z.string(),
+        draft: z.boolean().optional(),
+    })
+});
+
+/*
+ * A writing: the longer pieces.
+ */
+const writingsCollection = defineCollection({
+    loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/writings" }),
+    schema: z.object({
+        title: z.string(),
+        author: z.string(),
+        date: z.string(),
+        image: z.object({
+            url: z.string(),
+            alt: z.string()
+        }),
+        banner: bannerSchema.optional(),
+        draft: z.boolean().optional(),
+    })
+});
+
 export const collections = {
     missions: missionsCollection,
     weapons: weaponsCollection,
     judgements: judgementsCollection,
-    warriors: warriorsCollection
+    warriors: warriorsCollection,
+    strategies: strategiesCollection,
+    writings: writingsCollection
 };

@@ -1,0 +1,14 @@
+---
+import BaseLayout from './Layout.astro';
+import Banner from '../components/Banner.astro';
+const { frontmatter } = Astro.props;
+---
+<BaseLayout pageTitle={frontmatter.title}>
+    <Banner name={frontmatter.banner?.name} alt={frontmatter.banner?.alt} icons={frontmatter.banner?.icons} />
+    <h1>{frontmatter.title}</h1>
+    <p class="center">{frontmatter.summary}</p>
+    <slot />
+    <ul class="badge__list">
+        <li><span class="badge badge--item">REPOSITORY</span><a class="badge__link" href={frontmatter.repository} target="_blank">{frontmatter.repository}</a></li>
+    </ul>
+</BaseLayout>
