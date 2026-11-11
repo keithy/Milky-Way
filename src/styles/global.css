@@ -499,10 +499,11 @@ html.unzoomed .navbar {
 /*
  * The medium range.
  *
- * The margin here is narrow enough that the column has to come closer
- * to the content to make a bit more room for itself.
+ * The margin comes in only when the gutter is nearly gone. Until then
+ * the column keeps the same margin as the toggle above it, so that the
+ * two stay lined up with each other.
  */
-@media only screen and (max-width: 1149px) {
+@media only screen and (max-width: 899px) {
   .toolbar {
     right: 0.4rem;
   }
