@@ -2,13 +2,21 @@
 import ThemeIcon from './ThemeIcon.astro';
 import HaloLink from './HaloLink.astro';
 ---
+
 <div class="navbar">
     <div class="navbar__title">
         <HaloLink href="/" label="Angelic Infrastructure" />
     </div>
-    <div class="navbar__menu">
-        <HaloLink href="/works/" label="Works" />
-        <HaloLink href="/posts/" label="Posts" />
+</div>
+
+<div class="toolbar">
+    <nav class="toolbar__menu" aria-label="Sections">
+        <HaloLink href="/missions/" label="Missions" />
+        <HaloLink href="/weapons/" label="Weapons" />
+        <HaloLink href="/judgements/" label="Judgements" />
+        <HaloLink href="/warriors/" label="Warriors" />
+    </nav>
+    <div class="toolbar__toggle">
         <ThemeIcon />
     </div>
 </div>

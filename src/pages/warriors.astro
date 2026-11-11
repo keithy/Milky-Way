@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import CardWarrior from "../components/CardWarrior.astro";
+import Banner from "../components/Banner.astro";
+const allWarriors = await getCollection("warriors");
+const pageTitle = "Warriors";
+---
+
+<Layout pageTitle={pageTitle}>
+    <Banner
+        name="warrior"
+        alt="A warrior standing with his arms out"
+    />
+    <h1>Warriors</h1>
+    <p class="center">
+        The teams, the projects and the people behind the cause.
+    </p>
+    <ul role="list" class="link-card-grid">
+        {
+            allWarriors.map((warrior) => (
+                <CardWarrior
+                    url={`/warriors/${warrior.id}/`}
+                    image={warrior.data.image.url}
+                    title={warrior.data.title}
+                    recognition={warrior.data.recognition}
+                    draft={warrior.data.draft}
+                />
+            ))
+        }
+    </ul>
+</Layout>

@@ -1,0 +1,24 @@
+---
+import { getCollection } from "astro:content";
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import Banner from '../components/Banner.astro';
+const allWeapons = await getCollection("weapons");
+const pageTitle = "Angelic Tools & Tooling";
+---
+<Layout pageTitle={pageTitle}>
+    <Banner
+        name="rack"
+        alt="A rack of servers, standing on a cloud"
+    />
+    <h1>Angelic Tools &amp; Tooling</h1>
+    <ul role="list" class="link-card-grid">
+        {allWeapons.map((card) => <Card
+            url={`/weapons/${card.id}/`}
+            image={card.data.image.url}
+            title={card.data.title}
+            body={card.data.description}
+            draft={card.data.draft}
+        />)}
+    </ul>
+</Layout>

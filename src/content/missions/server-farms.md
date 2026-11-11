@@ -4,10 +4,13 @@ description: 'Composable, repeatable infrastructure for teams that need dependab
 image:
     url: '/images/GitHub.webp'
     alt: 'Server farm'
-worksImage1:
+banner:
+    name: balance-even
+    alt: A balance scale hanging level
+missionImage1:
     url: '/images/image-1.webp'
     alt: 'Racked hardware'
-worksImage2:
+missionImage2:
     url: '/images/image-2.webp'
     alt: 'Rack detail'
 platform: Infrastructure

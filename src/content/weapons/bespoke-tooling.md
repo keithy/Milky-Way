@@ -4,10 +4,13 @@ description: 'Specialised automation and integration work for the gaps between p
 image:
     url: '/images/GitHub.webp'
     alt: 'Bespoke tooling'
-worksImage1:
+banner:
+    name: rack
+    alt: A rack of servers, standing on a cloud
+weaponImage1:
     url: '/images/image-1.webp'
     alt: 'The gap between products'
-worksImage2:
+weaponImage2:
     url: '/images/image-2.webp'
     alt: 'Tooling in place'
 platform: Tooling

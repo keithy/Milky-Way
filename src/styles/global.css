@@ -270,15 +270,27 @@ html.unzoomed.leaving {
   }
 }
 
+/*
+ * The body is the content column.
+ *
+ * It is capped and centred, and it keeps that cap for as long as the
+ * viewport can give it the cap plus the margin either side. Below that
+ * the margin gives way first, and only when it has nothing left to
+ * give does the column itself begin to narrow.
+ *
+ * The result is that the text does not jump: the column is the same
+ * width right down to the point where the margin is at its minimum,
+ * and after that it shrinks a little at a time rather than all at once.
+ */
 body {
-  max-width: 756px;
+  width: min(756px, calc(100vw - 60px));
   margin: 0 auto;
   text-align: justify;
 }
 
 /* The three main pages keep the narrower measure. */
 html.unzoomed body {
-  max-width: 540px;
+  width: min(540px, calc(100vw - 60px));
 }
 
 h1,
@@ -385,20 +397,10 @@ header {
   margin-right: auto;
 }
 
-.navbar__menu {
-  justify-self: end;
-  width: max-content;
-  margin-right: calc((756px - 100vw) / 2 + 1rem + var(--chrome-inset));
-}
-
 /* On the pages where the content keeps the narrower measure, the bar
  * is inset by that column instead. */
 html.unzoomed .navbar {
   max-width: 540px;
-}
-
-html.unzoomed .navbar__menu {
-  margin-right: calc((540px - 100vw) / 2 + 1rem + var(--chrome-inset));
 }
 
 /* The site title is the chrome: Oxanium at its lightest weight, in
@@ -416,23 +418,109 @@ html.unzoomed .navbar__menu {
   white-space: nowrap;
 }
 
-.navbar__menu {
-  font-family: var(--chrome);
-  font-weight: var(--chrome-weight);
-  font-size: 1.1rem;
-  text-align: right;
-  text-transform: uppercase;
-  letter-spacing: var(--chrome-tracking);
-}
-
-.navbar__title>a,
-.navbar__menu>a {
+.navbar__title>a {
   color: var(--text);
   text-decoration: none;
 }
 
-.navbar__menu>a {
-  margin: 0 10px;
+/*
+ * The toolbar.
+ *
+ * The sections stand in the margin beside the content rather than in
+ * the flow with it, and they are fixed, so they stay beside the reader
+ * however far down the page they have gone.
+ *
+ * There are three ranges. On the wide range the margin is wide enough
+ * to hold the column comfortably. On the medium range the margin is
+ * narrower, so the column comes closer to the content to make a bit
+ * more room. Below that there is no margin left to stand in, and the
+ * toolbar becomes a bar across the top.
+ */
+.toolbar {
+  position: fixed;
+  top: 0.8rem;
+  right: var(--chrome-inset);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1.2rem;
+  font-family: var(--chrome);
+  font-weight: var(--chrome-weight);
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: var(--chrome-tracking);
+}
+
+.toolbar__menu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.7rem;
+  text-align: right;
+}
+
+.toolbar__menu>a {
+  color: var(--text);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/*
+ * The toggle sits above the sections, at the head of the column.
+ */
+.toolbar__toggle {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  order: -1;
+}
+
+/*
+ * The medium range.
+ *
+ * The margin here is narrow enough that the column has to come closer
+ * to the content to make a bit more room for itself.
+ */
+@media only screen and (max-width: 1149px) {
+  .toolbar {
+    right: 0.8rem;
+  }
+}
+
+/*
+ * The narrow range.
+ *
+ * There is no margin left to stand in, so the toolbar becomes a bar
+ * across the top, under the title.
+ */
+@media only screen and (max-width: 1049px) {
+  .toolbar {
+    position: static;
+    transform: none;
+    max-width: 540px;
+    margin: 0 auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .toolbar__menu {
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
+    text-align: center;
+  }
+
+  .toolbar__menu>a {
+    margin: 0 7px;
+  }
+
+  .toolbar__toggle {
+    justify-content: center;
+    order: 0;
+  }
 }
 
 /*
@@ -659,7 +747,7 @@ html.light {
   color: var(--text-light);
 }
 
-.light .navbar__menu>a {
+.light .toolbar__menu>a {
   color: var(--text-light);
 }
 
@@ -718,10 +806,6 @@ html.light {
 
 /* Media Query */
 @media only screen and (max-width: 600px) {
-  body {
-    width: 350px;
-  }
-
   .navbar {
     display: initial;
   }
@@ -731,12 +815,15 @@ html.light {
     white-space: normal;
   }
 
-  .navbar__menu {
-    text-align: center;
+  /* Four labels and the toggle will not fit across the narrowest
+   * screens at the usual size, so the row is set smaller there. */
+  .toolbar {
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
   }
 
-  .navbar__menu>a {
-    margin: 0 11px;
+  .toolbar__menu>a {
+    margin: 0 5px;
   }
 
   .skills__img {

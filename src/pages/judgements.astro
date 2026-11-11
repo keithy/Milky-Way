@@ -1,20 +1,24 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/CardPost.astro";
+import CardPost from "../components/CardPost.astro";
 import Banner from "../components/Banner.astro";
-const allPosts = await getCollection("posts");
-const pageTitle = "Posts";
+const allJudgements = await getCollection("judgements");
+const pageTitle = "Judgements";
 ---
 
 <Layout pageTitle={pageTitle}>
-    <Banner />
-    <h1>Blog</h1>
+    <Banner
+        name="balance-down-left"
+        alt="A balance scale tipping toward the left"
+        icons={{ left: 'windows', right: 'linux' }}
+    />
+    <h1>Judgements</h1>
     <ul role="list" class="link-card-grid">
         {
-            allPosts.map((cardPost) => (
-                <Card
-                    url={`/posts/${cardPost.id}/`}
+            allJudgements.map((cardPost) => (
+                <CardPost
+                    url={`/judgements/${cardPost.id}/`}
                     image={cardPost.data.image.url}
                     title={cardPost.data.title}
                     date={cardPost.data.date}
