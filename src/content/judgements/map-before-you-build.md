@@ -5,6 +5,7 @@ date: '09-30-2026'
 image:
     url: '/images/blog-post.webp'
     alt: 'Opportunity landscape'
+draft: true
 ---
 
 A Wardley Map is not just a diagram. It is a way to decide what to buy,

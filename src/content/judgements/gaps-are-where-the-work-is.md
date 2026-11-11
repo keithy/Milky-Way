@@ -5,6 +5,7 @@ date: '10-14-2026'
 image:
     url: '/images/blog-post.webp'
     alt: 'Bespoke tooling'
+draft: true
 ---
 
 Off-the-shelf software is very good at the things everybody needs.

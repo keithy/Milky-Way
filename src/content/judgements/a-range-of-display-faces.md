@@ -8,6 +8,7 @@ image:
 # This post sets the candidate faces in their own styles, so it needs
 # them loaded. Nothing else on the site does.
 candidates: true
+draft: true
 ---
 
 Cinzel was the wrong face. It is inscriptional and medieval, and the

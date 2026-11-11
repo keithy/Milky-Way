@@ -5,6 +5,7 @@ date: '11-05-2026'
 image:
     url: '/images/blog-post.webp'
     alt: 'Server farm'
+draft: true
 ---
 
 A server farm is not a rack of machines. It is a promise that the same

@@ -5,6 +5,7 @@ date: '10-28-2026'
 image:
     url: '/images/blog-post.webp'
     alt: 'Server appliance'
+draft: true
 ---
 
 An appliance is a promise about a problem rather than a product. You
