@@ -1,10 +1,10 @@
-// The three main pages — the index, the works list and the posts list —
-// zoom the backdrop in on the way out, and hold the navigation until the
-// zoom has finished.
+// The three main pages — the index, the missions list and the
+// judgements list — zoom the backdrop in on the way out, and hold the
+// navigation until the zoom has finished.
 //
-// The pages that are already zoomed, the posts and the projects, have
-// nothing to animate and navigate straight away. This script is only
-// loaded on the main pages.
+// The pages that are already zoomed, the detail pages, have nothing to
+// animate and navigate straight away. This script is only loaded on the
+// main pages.
 //
 // A document unload gives the browser nothing to animate from, so the
 // zoom has to happen while the page is still alive. That is what the
@@ -17,11 +17,13 @@
 
 const zoomDuration = 800;
 
-// The detail pages are the posts and the projects. The list pages share
+// The detail pages are the ones under a category. The list pages share
 // the prefix, so they are excluded.
 const detailPagePrefixes = [
-    "/posts/",
-    "/projects/",
+    "/missions/",
+    "/weapons/",
+    "/judgements/",
+    "/warriors/",
 ];
 
 const isDetailPage = (destination) =>
