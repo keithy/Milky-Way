@@ -288,21 +288,6 @@ body {
   text-align: justify;
 }
 
-/*
- * The zoomed pages come down to the narrower measure earlier than the
- * width alone would take them.
- *
- * The wide measure needs a wide viewport to sit in without crowding
- * the toolbar, so below this width the detail pages keep the narrower
- * one instead. The margin still has thirty pixels either side, and the
- * column still shrinks a little at a time below that.
- */
-@media only screen and (max-width: 1119px) {
-  body {
-    width: min(540px, calc(100vw - 60px));
-  }
-}
-
 /* The three main pages keep the narrower measure. */
 html.unzoomed body {
   width: min(540px, calc(100vw - 60px));
@@ -419,12 +404,6 @@ header {
  */
 html.unzoomed .navbar {
   width: min(540px, calc(100vw - 60px));
-}
-
-@media only screen and (max-width: 1119px) {
-  .navbar {
-    width: min(540px, calc(100vw - 60px));
-  }
 }
 
 /*
