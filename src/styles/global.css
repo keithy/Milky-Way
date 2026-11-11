@@ -379,7 +379,7 @@ li {
 header {
   width: 100vw;
   margin-left: calc(50% - 50vw);
-  padding: 0 1rem;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -392,21 +392,32 @@ header {
   grid-template-columns: auto 1fr;
   gap: 1rem;
   margin-top: 0.8rem;
-  max-width: 756px;
+  width: min(756px, calc(100vw - 60px));
   margin-left: auto;
   margin-right: auto;
 }
 
-/* On the pages where the content keeps the narrower measure, the bar
- * is inset by that column instead. */
+/*
+ * The bar takes the content column's width, the same way the content
+ * does, so that the title stands at the left of the text below it at
+ * every size.
+ */
 html.unzoomed .navbar {
-  max-width: 540px;
+  width: min(540px, calc(100vw - 60px));
 }
 
-/* The site title is the chrome: Oxanium at its lightest weight, in
- * caps. It is the one voice that does not change with the typography
- * option, because it is the mark of the site rather than the voice
- * of the page. */
+/*
+ * The site title.
+ *
+ * It is the chrome: Oxanium at its lightest weight, in caps. It is the
+ * one voice that does not change with the typography option, because it
+ * is the mark of the site rather than the voice of the page.
+ *
+ * It is the title at the top of the content, so it is in the flow with
+ * the content and scrolls away with it. It stands at the left of the
+ * content column, and the column is the narrower one on the pages that
+ * keep it.
+ */
 .navbar__title {
   font-family: var(--chrome);
   font-weight: var(--chrome-weight);
@@ -438,7 +449,7 @@ html.unzoomed .navbar {
  */
 .toolbar {
   position: fixed;
-  top: 0.8rem;
+  top: 3.2rem;
   right: var(--chrome-inset);
   z-index: 10;
   display: flex;
@@ -467,13 +478,22 @@ html.unzoomed .navbar {
 }
 
 /*
- * The toggle sits above the sections, at the head of the column.
+ * The toggle.
+ *
+ * It is fixed at the top right of the viewport, in the same place as
+ * the title is on the left, so that the two ends of the chrome balance
+ * each other. It is not part of the toolbar column: that column
+ * carries the sections, and the toggle is a switch rather than a
+ * place.
  */
 .toolbar__toggle {
+  position: fixed;
+  top: 0.6rem;
+  right: var(--chrome-inset);
+  z-index: 11;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  order: -1;
 }
 
 /*
@@ -484,7 +504,7 @@ html.unzoomed .navbar {
  */
 @media only screen and (max-width: 1149px) {
   .toolbar {
-    right: 0.8rem;
+    right: 0.4rem;
   }
 }
 
@@ -494,7 +514,7 @@ html.unzoomed .navbar {
  * There is no margin left to stand in, so the toolbar becomes a bar
  * across the top, under the title.
  */
-@media only screen and (max-width: 1049px) {
+@media only screen and (max-width: 599px) {
   .toolbar {
     position: static;
     transform: none;
@@ -517,10 +537,6 @@ html.unzoomed .navbar {
     margin: 0 7px;
   }
 
-  .toolbar__toggle {
-    justify-content: center;
-    order: 0;
-  }
 }
 
 /*
@@ -620,6 +636,24 @@ html.unzoomed .navbar {
   grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
   gap: 1rem;
   padding: 0;
+}
+
+/*
+ * The cards go to one column before the content runs out of room.
+ *
+ * The grid decides for itself how many columns it can hold, and it
+ * makes that decision on the width of the content alone. But the
+ * content is at its narrowest on the pages that use it while the
+ * viewport is still wide, and a pair of cards side by side in a
+ * narrow column is worse than a single card that has room to itself.
+ *
+ * So below this width the grid holds one column, whatever the content
+ * could have managed.
+ */
+@media only screen and (max-width: 769px) {
+  .link-card-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Button */
@@ -806,12 +840,7 @@ html.light {
 
 /* Media Query */
 @media only screen and (max-width: 600px) {
-  .navbar {
-    display: initial;
-  }
-
   .navbar__title {
-    text-align: center;
     white-space: normal;
   }
 
