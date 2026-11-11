@@ -288,6 +288,18 @@ body {
   text-align: justify;
 }
 
+/*
+ * The main is the content below the chrome.
+ *
+ * It carries a padding of its own so that the margin above a banner
+ * stays inside it. Without the padding the margin would collapse
+ * through the main and out to the header, where it would be lost, and
+ * the banner would sit hard against the site title.
+ */
+main {
+  padding-top: 1px;
+}
+
 /* The three main pages keep the narrower measure. */
 html.unzoomed body {
   width: min(540px, calc(100vw - 60px));
